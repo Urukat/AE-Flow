@@ -30,7 +30,8 @@ Overall, this encoder-flow-decoder architecture allows for efficient learning of
 ### Loss Function
 
 Two loss functions are used in AE-Flow to train the model. The first loss function is the Flow Loss, which measures the degree of anomaly based on the similarity between the standard Gaussian distribution and the transformed feature vectors. The second loss function is Reconstruction Loss, which measures the reconstruction quality based on the difference between the original image and the reconstructed image.
-<p style="text-align: center;">$L = α ∗ L_{flow} + (1 − α) ∗ L_recon$</p>
+
+$L = α ∗ L_{flow} + (1 − α) ∗ L_{recon}$
 
 
 Unlike other flow models, AE-Flow can provide a certain degree of interpretability. By comparing the original image, the reconstructed image and the residual image, a better understanding of how the model detects anomalies can be obtained.
@@ -46,6 +47,10 @@ Unlike other flow models, AE-Flow can provide a certain degree of interpretabili
 4. "Variational Autoencoder based Anomaly Detection using Reconstruction Probability" by An and Cho (2015).
 
 5. "Deep Autoencoding Gaussian Mixture Model for Unsupervised Anomaly Detection" by Zong et al. (2018).
+
+6. "Image Anomaly Detection with Generative Adversarial Networks" by  L. Deecke et al. (2018).
+
+7. "Unsupervised Deep Learning for Bayesian Brain MRI Segmentation" by Dalca et el. (2018).
 
 # 2. Weaknesses/Strengths/Potential
 
