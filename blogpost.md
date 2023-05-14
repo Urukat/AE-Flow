@@ -74,7 +74,7 @@ Unlike other flow models, AE-Flow can provide a certain degree of interpretabili
 
 # 5. Conclusion
 
-# 6. Contribution
+# 6. Groupmates Contribution
 
 Yikun GU: study the model structure, construct the repository, and write blogpost.
 
