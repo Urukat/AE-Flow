@@ -12,7 +12,8 @@ pip install ./src/requirement.txt
 ```
 ## Preparing datasets
 1. [Chest X-Ray](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia?resource=download)
-Here we provided a processed version of Chest X-Ray: [link](https://drive.google.com/file/d/15jCc-zBHmB9ILcu6ACXEtdb1OetEiVjH/view?usp=sharing). While the processed data should be placed at **./src/data/chest_xray/processed**
+
+Here we provided a processed version of Chest X-Ray: [link](https://drive.google.com/file/d/1cbVkAakcTKWHDYn1KUpP-K-VglAF-QXy/view?usp=sharing), While the processed data should be placed at **./src/data/chest_xray/processed**
 ## Getting started
 ```python
 # firstly enter the root folder
