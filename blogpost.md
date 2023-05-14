@@ -12,6 +12,8 @@ The AE-FLOW model follows an encoder-flow-decoder achitecture,
 
 3. Decoder: The decoder block reconstructs the normalized feature z' to an output image x' using a function g : Z → X'. In the AE-FLOW model, the decoder takes the normalized feature z' and produces an output image x' ∈ R3×H×W that has similar appearance to the input image x. The residual between x and x' is used as the reconstruction loss in training.
 
+![architecture](architecture.png)
+
 Overall, this encoder-flow-decoder architecture allows for efficient learning of low-dimensional representations of images that can be used for tasks such as anomaly detection or image generation.
 
 
