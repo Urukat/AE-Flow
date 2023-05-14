@@ -33,9 +33,9 @@ Two loss functions are used in AE-Flow to train the model. The first loss functi
 
 The loss function with parameter α is formulated as: 
 
-$$ $L = α ∗ L_{flow} + (1 − α) ∗ L_{recon}$ ,$$
+$$ L = α ∗ L_{flow} + (1 − α) ∗ L_{recon},$$
 
-where $L_{flow} = − log p_{Z}(z) = − log p_{Z'}(z') - log|det\frac{\partial z'}{\partial z}\|$
+$$where $L_{flow} = − log p_{Z}(z) = − log p_{Z'}(z') - log|det\frac{\partial z'}{\partial z}\|$$
 
 Unlike other flow models, AE-Flow can provide a certain degree of interpretability. By comparing the original image, the reconstructed image and the residual image, a better understanding of how the model detects anomalies can be obtained.
 
