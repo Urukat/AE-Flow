@@ -35,6 +35,16 @@ Unlike other flow models, AE-Flow can provide a certain degree of interpretabili
 
 ### Related Works
 
+1. "Unsupervised Anomaly Detection with Generative Adversarial Networks to Guide Marker Discovery" by Schlegl et al. (2017).
+
+2. "Unsupervised Anomaly Detection via Variational Auto-Encoder for Seasonal KPIs in Web Applications" by Xu et al. (2018).
+
+3. "Deep One-Class Classification" by Ruff et al. (2018).
+
+4. "Variational Autoencoder based Anomaly Detection using Reconstruction Probability" by An and Cho (2015).
+
+5. "Deep Autoencoding Gaussian Mixture Model for Unsupervised Anomaly Detection" by Zong et al. (2018).
+
 # 2. Weaknesses/Strengths/Potential
 
 # 3. Novel Contribution
