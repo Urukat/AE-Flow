@@ -36,6 +36,7 @@ The loss function with parameter α is formulated as:
 $$ L = α ∗ L_{flow} + (1 − α) ∗ L_{recon},$$
 
 where $$L_{flow} = − log p_{Z}(z) = − log p_{Z'}(z') - log|det\frac{\partial z'}{\partial z}\|$$
+$$L_{recon} = MSE(x, x') = \frac{1}{N^2}\sum_{i=1}^{n}\sum_{j=1}^{n}(X_(i,j)-X_(i,j)')$$
 
 Unlike other flow models, AE-Flow can provide a certain degree of interpretability. By comparing the original image, the reconstructed image and the residual image, a better understanding of how the model detects anomalies can be obtained.
 
