@@ -8,6 +8,7 @@ This is an unofficial implementation of ICLR 2023 paper [AE-FLOW: Autoencoders w
 conda create -n ae-flow python=3.8
 conda activate ae-flow
 conda install pytorch==1.12.1
+pip install ./src/requirement.txt
 ```
 ## Preparing datasets
 1. [Chest X-Ray](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia?resource=download)
