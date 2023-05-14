@@ -6,7 +6,7 @@ The AE-FLOW model follows an encoder-flow-decoder achitecture.
 
 ### The following are the key components of AE-Flow:
 
-1. ##Encoder##: The encoder block takes an input image x and extracts low-dimensional features z using a function f : X → Z. In the AE-FLOW model, the encoder transforms the input image x ∈ R<sup>3×H×W<\sup> to a feature z ∈ R<sup>C×H/16×W/16<\sup>, where H and W are the height and width of the original image, C is the number of channels, and 16 is a downsampling factor.
+1. ##Encoder##: The encoder block takes an input image x and extracts low-dimensional features z using a function f : X → Z. In the AE-FLOW model, the encoder transforms the input image x ∈ R<sup>3×H×W</sup> to a feature z ∈ R<sup>C×H/16×W/16</sup>, where H and W are the height and width of the original image, C is the number of channels, and 16 is a downsampling factor.
 ![e-f-d](encoder-decoder.png)
 
 2. ##Normalizing flows##: The Normalizing Flow Model is a generative model that converts a complex distribution into a simple distribution. In AE-Flow, the regularizing flow model is used to convert the feature vectors extracted by the autoencoder into a standard Gaussian distribution. The normalizing flows transform the feature vector z to a standard Gaussian distribution. This is done by applying a series of invertible transformations to z that preserve its dimensionality and allow for efficient computation of likelihoods. The likelihood of the normalized feature is used as the flow loss in training.
