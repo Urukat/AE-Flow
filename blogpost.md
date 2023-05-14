@@ -32,7 +32,8 @@ Overall, this encoder-flow-decoder architecture allows for efficient learning of
 Two loss functions are used in AE-Flow to train the model. The first loss function is the Flow Loss, which measures the degree of anomaly based on the similarity between the standard Gaussian distribution and the transformed feature vectors. The second loss function is Reconstruction Loss, which measures the reconstruction quality based on the difference between the original image and the reconstructed image.
 
 The loss function with parameter α is formulated as: $L = α ∗ L_{flow} + (1 − α) ∗ L_{recon}$,
-where L_{flow} = − log pZ(z) = − log pZ′ (z
+
+where L_{flow} = − log p_{Z}(z) = − log p_{Z'}(z') - log|det\frac{\partial z'}{\partial z}\|
 
 Unlike other flow models, AE-Flow can provide a certain degree of interpretability. By comparing the original image, the reconstructed image and the residual image, a better understanding of how the model detects anomalies can be obtained.
 
