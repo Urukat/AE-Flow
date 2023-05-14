@@ -87,7 +87,8 @@ class AEFlowDataset(VisionDataset):
             data_list = []
             print(f"Processing {folder}")
             for f in tqdm(os.listdir(folder)):
-                img = Image.open(osp.join(folder, f))
+                # in case some imges are saved as RGB format
+                img = Image.open(osp.join(folder, f)).convert("L")
                 if self.pre_transform is not None:
                     img = self.pre_transform(img)
                 data_list.append(img.unsqueeze(0))
