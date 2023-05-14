@@ -27,6 +27,7 @@ python test.py --submodel_name fast_flow --model_path ./trained-model.pch --data
 | Fast-flow                         |    Chest X-Ray    |     [link](https://drive.google.com/file/d/1DQgAklJeo_A6KRZoR0rL3uNn3LxoeXfG/view?usp=sharing)      |
 | ResNet                            |    Chest X-Ray    |     [Unavailable]()      |
 
+To use the pretrained model, you should specify the model path and types of subnet. 
 ## TODO:
 - [x] Draft for blogpost
 - [x] Setup the runnable Environment
