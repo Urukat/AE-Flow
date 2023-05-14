@@ -85,6 +85,8 @@ Unlike other flow models, AE-Flow can provide a certain degree of interpretabili
 
 The proposed method was tested on four public medical datasets (OCT, Chest X-ray and BraTS2021) and one non-medical dataset (MIIC).
 
+![result](results_1.png)
+
 # 5. Conclusion
 
 # 6. Groupmates Contribution
