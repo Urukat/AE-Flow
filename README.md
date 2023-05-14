@@ -33,6 +33,6 @@ python test.py --submodel_name fast_flow --model_path ./trained-model.pch --data
 - [x] Download Chest X-ray dataset
 - [x] Setup model architecture
 - [x] Implement recon loss and flow loss
-- [] Extend Different dataset (OCT/ISIS2018/ISIC2018/BraTS2021)
-- [] Extend more evaluating metrics (AUC/F1/ACC/SEN/SPE)
-- [] Utilize semi-supervised techniques to make use of abnormal data
+- [ ] Extend Different dataset (OCT/ISIS2018/ISIC2018/BraTS2021)
+- [ ] Extend more evaluating metrics (AUC/F1/ACC/SEN/SPE)
+- [ ] Utilize semi-supervised techniques to make use of abnormal data
