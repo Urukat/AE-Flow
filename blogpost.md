@@ -75,3 +75,7 @@ Unlike other flow models, AE-Flow can provide a certain degree of interpretabili
 # 5. Conclusion
 
 # 6. Contribution
+
+Yikun GU: study the structure, construct the repository, and write blogpost.
+
+Pengfei HU: studying codes, reproducing, and running experiments.
