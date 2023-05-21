@@ -42,7 +42,7 @@ To use the pretrained model, you should specify the model path and types of subn
 
 ## TODO for code reconstruction:
 - [x] Encoder model
-- [ ] Decoder model
+- [x] Decoder model
 - [ ] Flow model
 - [ ] Dataloader for chest-xray dataset
 - [ ] Download and preprocessing chest_xray dataset
