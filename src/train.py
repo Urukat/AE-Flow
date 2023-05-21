@@ -4,7 +4,7 @@ import torch
 
 from model import ae_flow
 from tqdm import tqdm
-from .HYPERPARAMETER import alpha, beta, batch_size
+from HYPERPARAMETER import alpha, beta, batch_size
 
 def train():
     device = "cuda" if torch.cuda.is_available() else "cpu"

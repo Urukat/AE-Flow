@@ -1,13 +1,18 @@
 import torch.nn as nn
+from .flow import NormalizingFlow
 from .encoder import Encoder
+from .decoder import Decoder
 
 class AE_FLOW(nn.Module):
     def __init__(self):
         super().__init__()
         # Here we use default weights of pretrained wide_resnet50_2 which is equivalent to IMAGENET1K_V2 
         self.encoder = Encoder()
-        print(self.encoder)
+        self.flow = NormalizingFlow()
+        self.decoder = Decoder()
 
-    def forward(self, x):
-        self.latent_z = self.encoder(x)
+    def forward(self, img):
+        self.latent_z = self.encoder(img)
+        self.z_hat, self.jaz = self.flow(self.latent_z)
+        self.rec_img = self.decoder(self.z_hat)
         return self.latent_z
