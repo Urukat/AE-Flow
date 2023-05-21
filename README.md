@@ -39,3 +39,17 @@ To use the pretrained model, you should specify the model path and types of subn
 - [ ] Extend Different dataset (OCT/ISIS2018/ISIC2018/BraTS2021)
 - [ ] Extend more evaluating metrics (AUC/F1/ACC/SEN/SPE)
 - [ ] Utilize semi-supervised techniques to make use of abnormal data
+
+## TODO for code reconstruction:
+- [ ] Encoder model
+- [ ] Decoder model
+- [ ] Flow model
+- [ ] Dataloader for chest-xray dataset
+- [ ] Download and preprocessing chest_xray dataset
+- [ ] Download and preprocessing OCT dataset, if possible download ISIC2018 and BraTS2021 dataset
+- [ ] Distribution curves of the anomaly score of the anomaly and normal data
+- [ ] Grid images for comparison images for reconstruting images
+- [ ] Metric: AUC F1 ACC
+- [ ] Metrics: SEN SPE
+- [ ] Semi-supervised techniques with the help of abnormal data
+
