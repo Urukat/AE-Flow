@@ -21,11 +21,11 @@ The decoder block in the AE-FLOW model takes as input a normalized feature vecto
 
 In the AE-FLOW model, the decoder takes as input a normalized feature vector z' that has been transformed by normalizing flow into a standard Gaussian distribution. The decoder then applies a series of deconvolutional and upsampling layers to reconstruct an output image x' that has similar appearance to the input image x. The residual between x and x' is used as the reconstruction loss during training.
 
-![e-f-d](encoder-decoder.png)
+![e-f-d](./figures/encoder-decoder.png)
 
 Overall, this encoder-flow-decoder architecture allows for efficient learning of low-dimensional representations of images that can be used for tasks such as anomaly detection or image generation.
 
-![architecture](architecture.png)
+![architecture](./figures/architecture.png)
 
 ### Loss Function
 
@@ -85,7 +85,7 @@ Unlike other flow models, AE-Flow can provide a certain degree of interpretabili
 
 The proposed method was tested on four public medical datasets (OCT, Chest X-ray and BraTS2021) and one non-medical dataset (MIIC).
 
-![result](results_1.png)
+![result](./figures/results_1.png)
 
 # 5. Conclusion
 
