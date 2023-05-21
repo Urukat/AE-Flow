@@ -41,7 +41,7 @@ To use the pretrained model, you should specify the model path and types of subn
 - [ ] Utilize semi-supervised techniques to make use of abnormal data
 
 ## TODO for code reconstruction:
-- [ ] Encoder model
+- [x] Encoder model
 - [ ] Decoder model
 - [ ] Flow model
 - [ ] Dataloader for chest-xray dataset
