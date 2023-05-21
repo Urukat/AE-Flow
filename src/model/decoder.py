@@ -18,8 +18,8 @@ class Decoder(nn.Module):
         )
 
     def forward(self, x):
-        out = self.model(x)
-        return out
+        rec_img = self.model(x)
+        return rec_img
 
     # for the last layer we directly output the reconstructed image which means channel our is 3
     def build_block(self, channels_in, channels_out, last_layer=True):
