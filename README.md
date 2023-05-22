@@ -46,10 +46,11 @@ To use the pretrained model, you should specify the model path and types of subn
 - [x] Flow model
 - [x] Dataloader for chest-xray dataset
 - [x] Download and preprocessing chest_xray dataset
-- [ ] Download and preprocessing OCT dataset, if possible download ISIC2018 and BraTS2021 dataset
+- [ ] Implement loss
 - [ ] Distribution curves of the anomaly score of the anomaly and normal data
 - [ ] Grid images for comparison images for reconstruting images
 - [ ] Metric: AUC F1 ACC
 - [ ] Metrics: SEN SPE
+- [ ] Download and preprocessing OCT dataset, if possible download ISIC2018 and BraTS2021 dataset
 - [ ] Semi-supervised techniques with the help of abnormal data
 

@@ -13,6 +13,8 @@ class AE_FLOW(nn.Module):
 
     def forward(self, img):
         self.latent_z = self.encoder(img)
+        # [batch_size, 1024, 16, 16] [batch_size]
         self.z_hat, self.jaz = self.flow(self.latent_z)
+        # [batch_size, 3, 256, 256]
         self.rec_img = self.decoder(self.z_hat)
-        return self.latent_z
+        return self.rec_img

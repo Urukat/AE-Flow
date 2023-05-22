@@ -48,7 +48,8 @@ class ChestXrayDataset(VisionDataset):
     def __getitem__(self, index):
         img = self.image_list[index]
         label = self.label
-        return img, label
+        # since the encoder is trained on 3-channel images of IMAGENET, here we should expand the image
+        return img.expand(3, -1, -1), label
     
     def __len__(self):
-        return 
+        return len(self.image_list)
