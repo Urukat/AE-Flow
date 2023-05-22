@@ -46,7 +46,7 @@ To use the pretrained model, you should specify the model path and types of subn
 - [x] Flow model
 - [x] Dataloader for chest-xray dataset
 - [x] Download and preprocessing chest_xray dataset
-- [ ] Implement loss
+- [x] Implement loss
 - [ ] Distribution curves of the anomaly score of the anomaly and normal data
 - [ ] Grid images for comparison images for reconstruting images
 - [ ] Metric: AUC F1 ACC

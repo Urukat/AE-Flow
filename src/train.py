@@ -17,11 +17,22 @@ def train():
     for epoch in range(epochs):
         model.train()
         epoch_loss = 0.0
-        for i, (img, label) in tqdm(enumerate(dataloader)):
+        anomaly_scores = []
+        # label always is normal(0)
+        for i, (img, _) in tqdm(enumerate(dataloader)):
             img = img.to(device)
-            label = label.to(device)
-            rec_img = model(img)
+            rec_img, z_hat, jac = model(img)
+            recon_loss = torch.nn.functional.mse_loss(rec_img, img)
+            flow_loss, log_z = model.flow_loss()
+            loss = (1 - alpha) * recon_loss + alpha * flow_loss
+            
+            epoch_loss += loss.item()
             optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+
+            anomaly_score = model.anomaly_score(beta, log_z, img)
+            anomaly_scores.append(anomaly_score)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

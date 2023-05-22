@@ -1,7 +1,8 @@
+import torch
 import torch.nn as nn
 from FrEIA.framework import SequenceINN
 from FrEIA.modules import AllInOneBlock 
-
+from FrEIA.modules import InvertibleModule 
 class NormalizingFlow(nn.Module):
     def __init__(self, subnet_name="conv_type", flow_step=8):
         super().__init__()
@@ -28,9 +29,9 @@ def subnet_conv(dims_in, dims_out):
        nn.Conv2d(dims_in, dims_out, kernel_size=(1, 1)),
     )
 
-class Resnet_flow(nn.Module):
+class Resnet_flow(InvertibleModule):
     def __init__(self, dims_in, dims_out):
-        super().__init__()
+        super().__init__(dims_in, dims_out)
         self.layers = nn.Sequential(
             nn.Conv2d(dims_in, dims_out, (3, 3), padding=1),
             nn.BatchNorm2d(dims_out),

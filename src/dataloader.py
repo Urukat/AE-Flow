@@ -16,7 +16,10 @@ class ChestXrayDataset(VisionDataset):
         # We follow the author's step, there is no normalization
         self.transform = transforms.Compose([
             transforms.Resize((256, 256)), 
+            # make [0, 255] to [0, 1]
             transforms.ToTensor(),
+            # make [0, 1] to [-1, 1]
+            transforms.Normalize(mean=(0.5), std=(0.5))
         ])
         
 
