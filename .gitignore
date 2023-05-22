@@ -1,5 +1,6 @@
 /configs
 /src_old/data/chest_xray
+/data/chest_xray
 .pyc
 */__pycache__
 **/__pycache__

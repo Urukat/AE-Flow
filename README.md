@@ -43,9 +43,9 @@ To use the pretrained model, you should specify the model path and types of subn
 ## TODO for code reconstruction:
 - [x] Encoder model
 - [x] Decoder model
-- [ ] Flow model
-- [ ] Dataloader for chest-xray dataset
-- [ ] Download and preprocessing chest_xray dataset
+- [x] Flow model
+- [x] Dataloader for chest-xray dataset
+- [x] Download and preprocessing chest_xray dataset
 - [ ] Download and preprocessing OCT dataset, if possible download ISIC2018 and BraTS2021 dataset
 - [ ] Distribution curves of the anomaly score of the anomaly and normal data
 - [ ] Grid images for comparison images for reconstruting images

@@ -33,7 +33,6 @@ def train(submodel_name, epochs, model_path, dataset_path):
 
     model = AEFlow(submodel_name, device)
     optimizer = torch.optim.Adam(model.parameters())
-    print(model)
     alpha = 0.5
     beta = 0.9  
     global_train_step = 0
