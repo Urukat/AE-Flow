@@ -1,7 +1,5 @@
-import os.path as osp
 import argparse
-import time
-
+import matplotlib.pyplot as plt
 import torch
 import numpy as np
 from torch.utils.data import DataLoader
@@ -44,6 +42,27 @@ def metrics(true, anomaly_scores, threshold):
 
     return results
 
+def plot_anomaly_score_distribution(true_labels, anomaly_scores):
+    normal_scores = np.array([score for label, score in zip(true_labels, anomaly_scores) if label == 0])
+    anomaly_scores = np.array([score for label, score in zip(true_labels, anomaly_scores) if label == 1])
+
+    plt.figure(figsize=(12, 8))
+
+    # Plot histogram for normal scores
+    hist, bins = np.histogram(normal_scores, bins=100, density=True)
+    plt.plot(bins[:-1], hist, color='blue', alpha=0.7, label='Normal')
+    # Plot histogram for anomaly scores
+    hist, bins = np.histogram(anomaly_scores, bins=50, density=True)
+    plt.plot(bins[:-1], hist, color='red', alpha=0.7, label='Anomaly')
+
+    plt.xlabel('Anomaly Score')
+    plt.ylabel('Density')
+    plt.title('Anomaly Score Distribution')
+    plt.legend()
+    plt.grid(True, linestyle='--', alpha=0.5)
+    plt.tight_layout()
+    plt.show()
+
 
 def train():
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -83,12 +102,17 @@ def train():
     # mean_anomaly_score = torch.mean(torch.cat(anomaly_scores))
     #print(f"Mean anomaly score: {mean_anomaly_score}")
 
+    # Plot anomaly score distribution
+    plot_anomaly_score_distribution(true_labels, anomaly_scores)
+
     # Find optimal threshold
     optimal_threshold = optimize_threshold(anomaly_scores, true_labels)
     results = metrics(true, anomaly_scores, optimal_threshold)
 
     print(f"Optimal threshold: {optimal_threshold}")
-    print(f"Metrics: {results}")
+    print(f"Epoch {epoch}: {results}")
+
+    # TODO: best f1 score
 
     return results
 
