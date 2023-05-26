@@ -81,6 +81,11 @@ Unlike other flow models, AE-Flow can provide a certain degree of interpretabili
 
 # 3. Novel Contribution
 
+### Extend ways fror the evalution of AE-FLOW
+
+
+
+### Conduct semi-supervised techniques with the help of abnormal data
 
 
 # 4. Results
