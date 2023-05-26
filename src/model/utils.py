@@ -43,7 +43,6 @@ def plot_distribution(model, beta, test_normal_loader, test_abnormal_loader):
         flow_loss, log_z = model.flow_loss()
         anomaly_score = model.anomaly_score(beta, log_z, img)
         normal_anomaly_scores.append(anomaly_score.item())
-        break
     
     for i, (img, label) in tqdm(enumerate(test_abnormal_loader)):
         img = img.to(device)
@@ -53,7 +52,6 @@ def plot_distribution(model, beta, test_normal_loader, test_abnormal_loader):
         flow_loss, log_z = model.flow_loss()
         anomaly_score = model.anomaly_score(beta, log_z, img)
         abnormal_anomaly_scores.append(anomaly_score.item())
-        break
     
     fig, ax = plt.subplots()
     ax.hist(normal_anomaly_scores, color = 'red', alpha=0.5, label = 'abnormal')

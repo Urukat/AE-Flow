@@ -27,28 +27,28 @@ def train(args):
         epoch_loss = 0.0
         anomaly_scores = []
         # label always is normal(0)
-        # for i, (img, _) in tqdm(enumerate(train_loader)):
-        #     img = img.to(device)
-        #     rec_img, z_hat, jac = model(img)
-        #     recon_loss = torch.nn.functional.mse_loss(rec_img, img)
-        #     flow_loss, log_z = model.flow_loss()
+        for i, (img, _) in tqdm(enumerate(train_loader)):
+            img = img.to(device)
+            rec_img, z_hat, jac = model(img)
+            recon_loss = torch.nn.functional.mse_loss(rec_img, img)
+            flow_loss, log_z = model.flow_loss()
             
-        #     loss = (1 - alpha) * recon_loss + alpha * flow_loss
+            loss = (1 - alpha) * recon_loss + alpha * flow_loss
             
-        #     epoch_loss += loss.item()
-        #     optimizer.zero_grad()
-        #     loss.backward()
-        #     optimizer.step()
+            epoch_loss += loss.item()
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
 
-        #     anomaly_score = model.anomaly_score(beta, log_z, img)
-        #     anomaly_scores.append(anomaly_score)
-        #     if(i % log_frequency == 0):
-        #         print(recon_loss)
-        #         print(flow_loss)    
-        #         print(loss)   
+            anomaly_score = model.anomaly_score(beta, log_z, img)
+            anomaly_scores.append(anomaly_score)
+            if(i % log_frequency == 0):
+                print(recon_loss)
+                print(flow_loss)    
+                print(loss)   
             
-        #     # do not know if this works
-        #     torch.cuda.empty_cache()
+            # do not know if this works
+            torch.cuda.empty_cache()
         
         ut.plot_distribution(model, beta, test_loader_normal, test_loader_pneumonia)
 
