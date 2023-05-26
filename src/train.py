@@ -34,7 +34,6 @@ def train():
 
             anomaly_score = model.anomaly_score(beta, log_z, img)
             anomaly_scores.append(anomaly_score)
-            break
         # print(epoch)
         # print(anomaly_scores)
         # print(torch.sum(torch.stack(anomaly_scores)))
