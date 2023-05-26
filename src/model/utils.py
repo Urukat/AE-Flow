@@ -1,5 +1,8 @@
+import torch
 import scipy
 import numpy as np
+from tqdm import tqdm
+import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score, f1_score
 
 def cal_given_threshold(thr, anomaly_scores, true_labels):
@@ -27,5 +30,37 @@ def optimize_threshold(anomaly_scores, true_labels):
 
     return opt_threshold
 
+@torch.no_grad()
+def plot_distribution(model, beta, test_normal_loader, test_abnormal_loader):
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    normal_anomaly_scores = []
+    abnormal_anomaly_scores = []
+    for i, (img, label) in tqdm(enumerate(test_normal_loader)):
+        img = img.to(device)
+        label = label.to(device)
+
+        rec_img, z_hat, jac = model(img)
+        flow_loss, log_z = model.flow_loss()
+        anomaly_score = model.anomaly_score(beta, log_z, img)
+        normal_anomaly_scores.append(anomaly_score)
+        break
+    
+    for i, (img, label) in tqdm(enumerate(test_abnormal_loader)):
+        img = img.to(device)
+        label = label.to(device)
+
+        rec_img, z_hat, jac = model(img)
+        flow_loss, log_z = model.flow_loss()
+        anomaly_score = model.anomaly_score(beta, log_z, img)
+        abnormal_anomaly_scores.append(anomaly_score)
+        break
+    
+    fig, ax = plt.subplots()
+    ax.hist(normal_anomaly_scores, color = 'red', alpha=0.5, label = 'abnormal')
+    ax.hist(abnormal_anomaly_scores, color = 'green', alpha=0.5, label = 'normal')
+    plt.savefig('test.png')
+    # for i, (img, label) in tqdm(enumerate(test_abnormal_loader)):
+    #     print(label)
+    #     return 
 
 
