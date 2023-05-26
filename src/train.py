@@ -42,10 +42,10 @@ def train(args):
 
             anomaly_score = model.anomaly_score(beta, log_z, img)
             anomaly_scores.append(anomaly_score)
-            if(i % log_frequency == 0):
-                print(recon_loss)
-                print(flow_loss)    
-                print(loss)   
+            # if(i % log_frequency == 0):
+            #     print(recon_loss)
+            #     print(flow_loss)    
+            #     print(loss)   
             
             # do not know if this works
             # torch.cuda.empty_cache()
