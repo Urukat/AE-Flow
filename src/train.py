@@ -48,7 +48,7 @@ def train(args):
                 print(loss)   
             
             # do not know if this works
-            torch.cuda.empty_cache()
+            # torch.cuda.empty_cache()
         
         ut.plot_distribution(model, beta, test_loader_normal, test_loader_pneumonia)
 
