@@ -44,39 +44,6 @@ $$L_{recon} = MSE(x, x') = \frac{1}{N^2}\sum_{i=1}^{n}\sum_{j=1}^{n}(X_{i,j}-X_{
 
 Unlike other flow models, AE-Flow can provide a certain degree of interpretability. By comparing the original image, the reconstructed image and the residual image, a better understanding of how the model detects anomalies can be obtained.
 
-### Related Works
-An, J. (2015). Variational autoencoder based anomaly detection using reconstruction probability. SNU Data Mining Center, 2, 1. https://cir.nii.ac.jp/ja/crid/1370848655242575246 
-
-Dalca, A., V. (2019, April 25). Unsupervised Deep Learning for Bayesian Brain MRI Segmentation. arXiv.org. https://arxiv.org/abs/1904.11319 
-
-Deecke, L., Vandermeulen, R. A., Ruff, L., Mandt, S., & Kloft, M. (2018). Image Anomaly Detection with Generative Adversarial Networks. In Lecture Notes in Computer Science (pp. 3–17). Springer Science+Business Media. https://doi.org/10.1007/978-3-030-10925-7_1 
-
-Izmailov, P., Kirichenko, P., Finzi, M., & Wilson, A. (2020). Semi-Supervised Learning with Normalizing Flows. In International Conference on Machine Learning (Vol. 1, pp. 4615–4630). http://proceedings.mlr.press/v119/izmailov20a/izmailov20a.pdf 
-
-Kiran, B. R., Thomas, D., & Parakkal, R. (2018). An Overview of Deep Learning Based Methods for Unsupervised and Semi-Supervised Anomaly Detection in Videos. Journal of Imaging, 4(2), 36. https://doi.org/10.3390/jimaging4020036 
-
-Kobyzev, I., Prince, S. J. D., & Brubaker, M. A. (2021). Normalizing Flows: An Introduction and Review of Current Methods. IEEE Transactions on Pattern Analysis and Machine Intelligence, 43(11), 3964–3979. https://doi.org/10.1109/tpami.2020.2992934 
-
-Li, A., Miao, Z., Cen, Y., & Cen, Y. (2017). Anomaly detection using sparse reconstruction in crowded scenes. Multimedia Tools and Applications, 76(24), 26249–26271. https://doi.org/10.1007/s11042-016-4115-6 
-
-Ruff, L. (2018, July 3). Deep One-Class Classification. PMLR. https://proceedings.mlr.press/v80/ruff18a.html 
-
-Schlegl, T. (2017, March 17). Unsupervised Anomaly Detection with Generative Adversarial Networks to Guide Marker Discovery. arXiv.org. https://arxiv.org/abs/1703.05921 
-
-Schlegl, T., Seeböck, P., Waldstein, S. M., Langs, G., & Schmidt-Erfurth, U. (2019). f-AnoGAN: Fast unsupervised anomaly detection with generative adversarial networks. Medical Image Analysis, 54, 30–44. https://doi.org/10.1016/j.media.2019.01.010 
-
-Schlegl, T., Seeböck, P., Waldstein, S. M., Schmidt-Erfurth, U., & Langs, G. (2017). 
-
-Unsupervised Anomaly Detection with Generative Adversarial Networks to Guide Marker Discovery. In Lecture Notes in Computer Science (pp. 146–157). Springer Science+Business Media. https://doi.org/10.1007/978-3-319-59050-9_12 
-
-Wang, Z., Bovik, A. C., Sheikh, H. R., & Simoncelli, E. P. (2004). Image Quality Assessment: From Error Visibility to Structural Similarity. IEEE Transactions on Image Processing, 13(4), 600–612. https://doi.org/10.1109/tip.2003.819861 
-
-Xu, H., Chen, W., Zhao, N., Li, Z., Bu, J., Li, Z., Liu, Y., Zhao, Y., Pei, D., Feng, Y., Chen, J., Wang, Z., & Qiao, H. (2018). Unsupervised Anomaly Detection via Variational Auto-Encoder for Seasonal KPIs in Web Applications. https://doi.org/10.1145/3178876.3185996 
-
-Zhao, Y. (2023, February 1). AE-FLOW: Autoencoders with Normalizing Flows  for  Medical Images Anomaly Detection. OpenReview. https://openreview.net/forum?id=9OmCr1q54Z 
-
-Zong, B. (2023, January 23). Deep Autoencoding Gaussian Mixture Model for Unsupervised Anomaly Detection. OpenReview. https://openreview.net/forum?id=BJJLHbb0-
-
 
 # 2. Weaknesses/Strengths/Potential
 
@@ -123,3 +90,36 @@ Zong, B. (2023, January 23). Deep Autoencoding Gaussian Mixture Model for Unsupe
 Yikun GU: study the model structure, construct the repository, and write blogpost.
 
 Pengfei HU: study codes, reproduce other implementations, and run experiments.
+
+# 7. Related Works
+An, J. (2015). Variational autoencoder based anomaly detection using reconstruction probability. SNU Data Mining Center, 2, 1. https://cir.nii.ac.jp/ja/crid/1370848655242575246 
+
+Dalca, A., V. (2019, April 25). Unsupervised Deep Learning for Bayesian Brain MRI Segmentation. arXiv.org. https://arxiv.org/abs/1904.11319 
+
+Deecke, L., Vandermeulen, R. A., Ruff, L., Mandt, S., & Kloft, M. (2018). Image Anomaly Detection with Generative Adversarial Networks. In Lecture Notes in Computer Science (pp. 3–17). Springer Science+Business Media. https://doi.org/10.1007/978-3-030-10925-7_1 
+
+Izmailov, P., Kirichenko, P., Finzi, M., & Wilson, A. (2020). Semi-Supervised Learning with Normalizing Flows. In International Conference on Machine Learning (Vol. 1, pp. 4615–4630). http://proceedings.mlr.press/v119/izmailov20a/izmailov20a.pdf 
+
+Kiran, B. R., Thomas, D., & Parakkal, R. (2018). An Overview of Deep Learning Based Methods for Unsupervised and Semi-Supervised Anomaly Detection in Videos. Journal of Imaging, 4(2), 36. https://doi.org/10.3390/jimaging4020036 
+
+Kobyzev, I., Prince, S. J. D., & Brubaker, M. A. (2021). Normalizing Flows: An Introduction and Review of Current Methods. IEEE Transactions on Pattern Analysis and Machine Intelligence, 43(11), 3964–3979. https://doi.org/10.1109/tpami.2020.2992934 
+
+Li, A., Miao, Z., Cen, Y., & Cen, Y. (2017). Anomaly detection using sparse reconstruction in crowded scenes. Multimedia Tools and Applications, 76(24), 26249–26271. https://doi.org/10.1007/s11042-016-4115-6 
+
+Ruff, L. (2018, July 3). Deep One-Class Classification. PMLR. https://proceedings.mlr.press/v80/ruff18a.html 
+
+Schlegl, T. (2017, March 17). Unsupervised Anomaly Detection with Generative Adversarial Networks to Guide Marker Discovery. arXiv.org. https://arxiv.org/abs/1703.05921 
+
+Schlegl, T., Seeböck, P., Waldstein, S. M., Langs, G., & Schmidt-Erfurth, U. (2019). f-AnoGAN: Fast unsupervised anomaly detection with generative adversarial networks. Medical Image Analysis, 54, 30–44. https://doi.org/10.1016/j.media.2019.01.010 
+
+Schlegl, T., Seeböck, P., Waldstein, S. M., Schmidt-Erfurth, U., & Langs, G. (2017). 
+
+Unsupervised Anomaly Detection with Generative Adversarial Networks to Guide Marker Discovery. In Lecture Notes in Computer Science (pp. 146–157). Springer Science+Business Media. https://doi.org/10.1007/978-3-319-59050-9_12 
+
+Wang, Z., Bovik, A. C., Sheikh, H. R., & Simoncelli, E. P. (2004). Image Quality Assessment: From Error Visibility to Structural Similarity. IEEE Transactions on Image Processing, 13(4), 600–612. https://doi.org/10.1109/tip.2003.819861 
+
+Xu, H., Chen, W., Zhao, N., Li, Z., Bu, J., Li, Z., Liu, Y., Zhao, Y., Pei, D., Feng, Y., Chen, J., Wang, Z., & Qiao, H. (2018). Unsupervised Anomaly Detection via Variational Auto-Encoder for Seasonal KPIs in Web Applications. https://doi.org/10.1145/3178876.3185996 
+
+Zhao, Y. (2023, February 1). AE-FLOW: Autoencoders with Normalizing Flows  for  Medical Images Anomaly Detection. OpenReview. https://openreview.net/forum?id=9OmCr1q54Z 
+
+Zong, B. (2023, January 23). Deep Autoencoding Gaussian Mixture Model for Unsupervised Anomaly Detection. OpenReview. https://openreview.net/forum?id=BJJLHbb0-
