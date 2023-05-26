@@ -34,7 +34,12 @@ def train():
 
             anomaly_score = model.anomaly_score(beta, log_z, img)
             anomaly_scores.append(anomaly_score)
-        print(f"Train: epoch {epoch}, anomaly_score : {torch.sum(anomaly_scores)} train loss = {epoch_loss/j},")
+            break
+        # print(epoch)
+        # print(anomaly_scores)
+        # print(torch.sum(torch.stack(anomaly_scores)))
+        # print(epoch_loss)
+        print(f"Train: epoch {epoch}, anomaly_score : {torch.sum(torch.stack(anomaly_scores))} train loss = {epoch_loss}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
