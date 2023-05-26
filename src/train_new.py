@@ -100,7 +100,7 @@ def train():
     anomaly_scores = [item for sublist in anomaly_scores for item in sublist]
 
     # mean_anomaly_score = torch.mean(torch.cat(anomaly_scores))
-    #print(f"Mean anomaly score: {mean_anomaly_score}")
+    # print(f"Mean anomaly score: {mean_anomaly_score}")
 
     # Plot anomaly score distribution
     plot_anomaly_score_distribution(true_labels, anomaly_scores)

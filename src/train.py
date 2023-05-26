@@ -13,6 +13,7 @@ def train():
     dataset = ChestXrayDataset(root="./data", name='chest_xray', split='train', label='NORMAL')
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
     optimizer = optimizer = torch.optim.Adam(model.parameters())
+    model.to(device)
     
     for epoch in range(epochs):
         model.train()
