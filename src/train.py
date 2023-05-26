@@ -7,9 +7,9 @@ from tqdm import tqdm
 from HYPERPARAMETER import alpha, beta, batch_size, epochs, log_frequency
 from dataloader import ChestXrayDataset
 
-def train():
+def train(args):
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    model = ae_flow.AE_FLOW()
+    model = ae_flow.AE_FLOW(subnet=args.subnet)
     dataset = ChestXrayDataset(root="./data", name='chest_xray', split='train', label='NORMAL')
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
     optimizer = optimizer = torch.optim.Adam(model.parameters(), lr = 1e-4)
@@ -38,7 +38,8 @@ def train():
             anomaly_scores.append(anomaly_score)
             if(i % log_frequency == 0):
                 print(recon_loss)
-                print(flow_loss)                
+                print(flow_loss)    
+                print(loss)            
         # print(epoch)
         # print(anomaly_scores)
         # print(torch.sum(torch.stack(anomaly_scores)))
@@ -47,5 +48,6 @@ def train():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    parser.add_argument('--subnet', default='conv_type', type=str)
     args = parser.parse_args()
-    train()
+    train(args)
