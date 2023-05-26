@@ -70,12 +70,23 @@ Unlike other flow models, AE-Flow can provide a certain degree of interpretabili
 
 # 3. Novel Contribution
 
+### Reproduction process
+
+To reproduce the AE-FLOW model, we followed a pipeline that includes data preparation, model architecture implementation, training, evaluation, fine-tuning, and deployment. Firstly, we collected and preprocessed medical image datasets that contain both normal and abnormal images. We ensured that the images were properly labeled to facilitate supervised and semi-supervised training.
+
+Then we implemented the architecture of the AE-FLOW model. The encoder component of the model consists of convolutional layers that extract features from input images. The normalizing flow bottleneck component transforms these features into a tractable probability distribution using normalizing flow methods. Finally, the decoder component reconstructs images from these transformed features.
+
+We trained the AE-FLOW model using both self-supervised and semi-supervised approaches. For self-supervised training, we used only normal data to train the model. For semi-supervised training, we used both normal and abnormal data to train the model. We evaluated our trained AE-FLOW model's performance using multiple metrics such as AUC, F1 score, accuracy, sensitivity, and specificity as described in section 5 of the paper. We compared our results with those reported in the original paper to ensure reproducibility. Finally, we fine-tuned our trained AE-FLOW model by adjusting hyperparameters or modifying its architecture to improve its performance on our specific medical image dataset.
+
+Once we were satisfied with our trained AE-FLOW model's performance on our medical image dataset, we deployed it for anomaly detection tasks in real-world applications.
+
 ### Extend ways fror the evalution of AE-FLOW
 
-
+In addition to proposing the AE-FLOW model for efficient and effective anomaly detection in medical images, we also extended the evaluation of our model by using multiple metrics such as AUC, F1 score, accuracy, sensitivity, and specificity. These metrics provide a comprehensive evaluation of the performance of our model in detecting anomalies in medical images.
 
 ### Conduct semi-supervised techniques with the help of abnormal data
 
+Furthermore, we conducted a semi-supervised approach to train the AE-FLOW model with both normal and abnormal data. This approach allowed us to leverage the information contained in abnormal data to improve the performance of our model.
 
 # 4. Results
 
