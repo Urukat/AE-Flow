@@ -4,7 +4,7 @@ from FrEIA.framework import SequenceINN
 from FrEIA.modules import AllInOneBlock 
 from FrEIA.modules import InvertibleModule 
 class NormalizingFlow(nn.Module):
-    def __init__(self, subnet_name="conv_type", flow_step=8):
+    def __init__(self, subnet_name="resnet_type", flow_step=8):
         super().__init__()
         # According to the original paper, here we implement two types of subnet: conv_type and resnet_type
         self.inn = SequenceINN(1024, 16, 16)
@@ -12,8 +12,8 @@ class NormalizingFlow(nn.Module):
             if(subnet_name == "conv_type"):
                 self.inn.append(AllInOneBlock, subnet_constructor=subnet_conv)
             elif(subnet_name == "resnet_type"):
-                raise NotImplementedError
-                # self.inn.append(AllInOneBlock, subnet_constructor=subnet_conv)
+                # raise NotImplementedError
+                self.inn.append(AllInOneBlock, subnet_constructor=subnet_restnet)
             else:
                 raise NotImplementedError
 
@@ -29,9 +29,9 @@ def subnet_conv(dims_in, dims_out):
        nn.Conv2d(dims_in, dims_out, kernel_size=(1, 1)),
     )
 
-class Resnet_flow(InvertibleModule):
+class Resnet_flow(nn.Module):
     def __init__(self, dims_in, dims_out):
-        super().__init__(dims_in, dims_out)
+        super().__init__()
         self.layers = nn.Sequential(
             nn.Conv2d(dims_in, dims_out, (3, 3), padding=1),
             nn.BatchNorm2d(dims_out),

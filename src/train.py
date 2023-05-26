@@ -4,7 +4,7 @@ import torch
 from torch.utils.data import DataLoader
 from model import ae_flow
 from tqdm import tqdm
-from HYPERPARAMETER import alpha, beta, batch_size, epochs
+from HYPERPARAMETER import alpha, beta, batch_size, epochs, log_frequency
 from dataloader import ChestXrayDataset
 
 def train():
@@ -18,6 +18,7 @@ def train():
     for epoch in range(epochs):
         model.train()
         epoch_loss = 0.0
+        recon_total_loss = 0.0
         anomaly_scores = []
         # label always is normal(0)
         for i, (img, _) in tqdm(enumerate(dataloader)):
@@ -25,6 +26,7 @@ def train():
             rec_img, z_hat, jac = model(img)
             recon_loss = torch.nn.functional.mse_loss(rec_img, img)
             flow_loss, log_z = model.flow_loss()
+            
             loss = (1 - alpha) * recon_loss + alpha * flow_loss
             
             epoch_loss += loss.item()
@@ -34,6 +36,9 @@ def train():
 
             anomaly_score = model.anomaly_score(beta, log_z, img)
             anomaly_scores.append(anomaly_score)
+            if(i % log_frequency == 0):
+                print(recon_loss)
+                print(flow_loss)                
         # print(epoch)
         # print(anomaly_scores)
         # print(torch.sum(torch.stack(anomaly_scores)))
