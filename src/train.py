@@ -16,8 +16,8 @@ def train(args):
 
     test_set_normal = ChestXrayDataset(root="./data", name='chest_xray', split='test', label='NORMAL')
     test_set_pneumonia = ChestXrayDataset(root="./data", name='chest_xray', split='test', label='PNEUMONIA')
-    test_loader_normal = DataLoader(test_set_normal, batch_size=batch_size, shuffle=False)
-    test_loader_pneumonia = DataLoader(test_set_pneumonia, batch_size=batch_size, shuffle=False)
+    test_loader_normal = DataLoader(test_set_normal, batch_size=1, shuffle=False)
+    test_loader_pneumonia = DataLoader(test_set_pneumonia, batch_size=1, shuffle=False)
 
     optimizer = optimizer = torch.optim.Adam(model.parameters(), lr = 1e-4)
     model.to(device)
