@@ -96,7 +96,7 @@ In conclusion, we successfully reproduced the AE-FLOW model proposed in the pape
 
 Our results showed that the AE-FLOW model is effective and robust for detecting anomalies in medical images. The model's self-supervised approach using only normal data makes it more adaptive to real-world applications where abnormal data may be scarce or difficult to obtain. The pixel-level interpretability of anomaly data provided by the model is also a valuable feature for medical professionals who need to understand how anomalies are detected.
 
-Overall, our project demonstrates the importance of reproducibility in machine learning research and highlights the potential of the AE-FLOW model for anomaly detection in medical images. Future work could explore its application to other types of medical imaging modalities or investigate its performance on larger datasets with more complex anomalies.
+Overall, our project demonstrates the importance of reproducibility in machine learning research and highlights the potential of the AE-FLOW model for medical anomaly detection. Future work could explore its application to other types of medical imaging modalities or investigate its performance on larger datasets with more complex anomalies.
 
 # 6. Groupmates Contribution
 
