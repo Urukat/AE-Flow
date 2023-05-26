@@ -12,7 +12,7 @@ def train():
     model = ae_flow.AE_FLOW()
     dataset = ChestXrayDataset(root="./data", name='chest_xray', split='train', label='NORMAL')
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
-    optimizer = optimizer = torch.optim.Adam(model.parameters())
+    optimizer = optimizer = torch.optim.Adam(model.parameters(), lr = 1e-4)
     model.to(device)
     
     for epoch in range(epochs):
