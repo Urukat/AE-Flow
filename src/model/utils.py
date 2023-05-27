@@ -57,8 +57,8 @@ def plot_distribution(model, beta, test_normal_loader, test_abnormal_loader, dat
     
     ana_min = -min(normal_anomaly_scores + abnormal_anomaly_scores)
     fig, ax = plt.subplots()
-    ax.hist(normal_anomaly_scores / ana_min, color = 'green', alpha=0.5, label = 'normal')
-    ax.hist(abnormal_anomaly_scores / ana_min, color = 'red', alpha=0.5, label = 'abnormal')
+    ax.hist(np.array(normal_anomaly_scores) / ana_min, color = 'green', alpha=0.5, label = 'normal')
+    ax.hist(np.array(abnormal_anomaly_scores) / ana_min, color = 'red', alpha=0.5, label = 'abnormal')
     plt.savefig("./src/graphs/{}_{}.png".format(dataset_name, epoch))
     # for i, (img, label) in tqdm(enumerate(test_abnormal_loader)):
     #     print(label)
