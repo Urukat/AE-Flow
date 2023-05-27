@@ -72,11 +72,13 @@ Unlike other flow models, AE-Flow can provide a certain degree of interpretabili
 
 ### Extend ways fror the evalution of AE-FLOW
 
-In addition to proposing the AE-FLOW model for efficient and effective anomaly detection in medical images, we also extended the evaluation of our model by using multiple metrics such as AUC, F1 score, accuracy, sensitivity, and specificity. These metrics provide a comprehensive evaluation of the performance of our model in detecting anomalies in medical images.
+In our study, we went beyond the development of the AE-FLOW model and sought to enhance the evaluation process by incorporating various metrics. By considering metrics such as Area Under the Curve (AUC), F1 score, accuracy, sensitivity, and specificity, we aimed to provide a comprehensive assessment of our model's performance in detecting anomalies within medical images. This multi-faceted evaluation approach allowed us to gain deeper insights into the capabilities and limitations of the AE-FLOW model.
 
 ### Conduct semi-supervised techniques with the help of abnormal data
 
-Furthermore, we conducted a semi-supervised approach to train the AE-FLOW model with both normal and abnormal data. This approach allowed us to leverage the information contained in abnormal data to improve the performance of our model.
+Moreover, we recognized the significance of abnormal data in training our model effectively. To address this, we conducted a semi-supervised approach to train the AE-FLOW model with both normal and abnormal data. By incorporating abnormal data, we aimed to leverage the valuable information present within these instances to further enhance the performance of our model. This semi-supervised approach allowed us to capitalize on the inherent patterns and characteristics of abnormal data, thus augmenting the anomaly detection capabilities of the AE-FLOW model.
+
+By extending the evaluation process through the utilization of multiple metrics and adopting a semi-supervised technique with the assistance of abnormal data, we aimed to ensure a thorough and robust evaluation of the AE-FLOW model. These advancements contribute to a more comprehensive understanding of the model's effectiveness and efficiency in detecting anomalies within medical images.
 
 # 4. Results
 
