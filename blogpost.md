@@ -80,7 +80,16 @@ Moreover, we recognized the significance of abnormal data in training our model 
 
 By extending the evaluation process through the utilization of multiple metrics and adopting a semi-supervised technique with the assistance of abnormal data, we aimed to ensure a thorough and robust evaluation of the AE-FLOW model. These advancements contribute to a more comprehensive understanding of the model's effectiveness and efficiency in detecting anomalies within medical images.
 
-Our proposed method combines the benefits of normalizing flow models with semi-supervised learning to improve anomaly detection performance on unlabeled data. Specifically, we consider to use Flow Gaussian Mixture Model (FlowGMM) introduced in the paper [Semi-Supervised Learning with Normalizing Flows](http://proceedings.mlr.press/v119/izmailov20a/izmailov20a.pdf) as the generative model component of AE-FLOW. The autoencoder component is used to encode input images into a latent space representation, which is then transformed by FlowGMM to generate samples from the learned probability distribution. Anomaly detection is performed by comparing input images to these generated samples.
+Our proposed method combines the benefits of normalizing flow models with semi-supervised learning to improve anomaly detection performance on unlabeled data. Specifically, we consider to use Flow Gaussian Mixture Model (FlowGMM) introduced in the paper [Semi-Supervised Learning with Normalizing Flows](http://proceedings.mlr.press/v119/izmailov20a/izmailov20a.pdf) as the generative model component of AE-FLOW. 
+
+In FlowGMM, the density in the latent space is modeled as a Gaussian mixture, with each mixture component corresponding to a class represented in the labeled data. This allows for sharing structure over labeled and unlabeled data, which can improve predictions on unseen data. The resulting FlowGMM provides an exact joint likelihood over both labeled and unlabeled data for end-to-end training.
+
+FlowGMM has several advantages over other semi-supervised learning approaches. First, it provides an exact likelihood over both labeled and unlabeled data, which allows for more accurate modeling of complex probability distributions. Second, it is interpretable, meaning that it can provide insights into how the model is making predictions. Third, it has broad applicability beyond image data and can be used on tabular or text data as well.
+
+FlowGMM has been shown to be effective in several applications, including AG-News and Yahoo Answers text data, tabular data, and semi-supervised image classification. It has also been shown to discover interpretable structure, provide real-time optimization-free feature visualizations, and specify well-calibrated predictive distributions.
+
+We consider to incorporate FlowGMM into AE-FLOW. The autoencoder component of AE-FLOW is used to encode input images into a latent space representation, which is then transformed by FlowGMM to generate samples from the learned probability distribution. Anomaly detection is performed by comparing input images to these generated samples.
+
 
 # 4. Results
 
