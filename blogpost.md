@@ -104,13 +104,15 @@ Once we were satisfied with our trained AE-FLOW model's performance on our medic
 
 ### Training Results:
 
+To further confirm the efficacy, the distribution curves representing the computed anomaly scores for both categories, namely normal and anomaly, are depicted in the provided Figure, which is one of the figures we got during training. The color red represents anomaly data, while green signifies normal data; the x-axis illustrates the anomaly score, while the y-axis represents the probability density. Notably, the anomaly data consistently exhibits higher predicted anomaly scores compared to the normal data. Additionally, the overlapping area between the two curves is relatively small, constituting only a minor proportion of the total area. Each curve also possesses a distinct peak, affirming the validity and effectiveness of the proposed anomaly score function as a reliable measure for distinguishing normal and abnormal samples. 
+
+![20](./figures/chest_xray_train_20.png)
+
 |   |   |   |   |   |
 |---|---|---|---|---|
 |   |   |   |   |   |
 |   |   |   |   |   |
 |   |   |   |   |   |
-
-![20](./figures/chest_xray_train_20.png)
 
 # 5. Difficulties
 
