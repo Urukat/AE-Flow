@@ -58,7 +58,7 @@ def plot_distribution(model, beta, test_normal_loader, test_abnormal_loader, dat
     fig, ax = plt.subplots()
     ax.hist(normal_anomaly_scores, color = 'green', alpha=0.5, label = 'normal')
     ax.hist(abnormal_anomaly_scores, color = 'red', alpha=0.5, label = 'abnormal')
-    plt.savefig('./src/graphs/{dataset_name}_{epoch}.png'.foramat())
+    plt.savefig("./src/graphs/{}_{}.png".format(dataset_name, epoch))
     # for i, (img, label) in tqdm(enumerate(test_abnormal_loader)):
     #     print(label)
     #     return 
