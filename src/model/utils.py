@@ -31,7 +31,7 @@ def optimize_threshold(anomaly_scores, true_labels):
     return opt_threshold
 
 @torch.no_grad()
-def plot_distribution(model, beta, test_normal_loader, test_abnormal_loader):
+def plot_distribution(model, beta, test_normal_loader, test_abnormal_loader, dataset_name, epoch):
     device = "cuda" if torch.cuda.is_available() else "cpu"
     normal_anomaly_scores = []
     abnormal_anomaly_scores = []
@@ -58,7 +58,7 @@ def plot_distribution(model, beta, test_normal_loader, test_abnormal_loader):
     fig, ax = plt.subplots()
     ax.hist(normal_anomaly_scores, color = 'green', alpha=0.5, label = 'normal')
     ax.hist(abnormal_anomaly_scores, color = 'red', alpha=0.5, label = 'abnormal')
-    plt.savefig('test.png')
+    plt.savefig('./src/graphs/{dataset_name}_{epoch}.png'.foramat())
     # for i, (img, label) in tqdm(enumerate(test_abnormal_loader)):
     #     print(label)
     #     return 
