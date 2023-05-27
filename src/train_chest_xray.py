@@ -60,7 +60,7 @@ def find_threshold(model, normal_loader, abnormal_loader):
         img = img.to(device)
         rec_img, z_hat, jac = model(img)
         flow_loss, log_z = model.flow_loss()
-        anomaly_score = np.array(model.anomaly_score(beta, log_z, img)).cpu()
+        anomaly_score = np.array(model.anomaly_score(beta, log_z, img).cpu())
         for score in anomaly_score:
             anomaly_scores.append(score)
             labels.append(0)
@@ -69,7 +69,7 @@ def find_threshold(model, normal_loader, abnormal_loader):
         img = img.to(device)
         rec_img, z_hat, jac = model(img)
         flow_loss, log_z = model.flow_loss()
-        anomaly_score = np.array(model.anomaly_score(beta, log_z, img)).cpu()
+        anomaly_score = np.array(model.anomaly_score(beta, log_z, img).cpu())
         for score in anomaly_score:
             anomaly_scores.append(score)
             labels.append(1)
