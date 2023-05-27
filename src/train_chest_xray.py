@@ -46,7 +46,7 @@ def cal_given_threshold(thr, anomaly_scores, true_labels):
     # Generate predictions based on the proposed threshold
     preds = [score > thr for score in anomaly_scores]
     # Calculate the F1 score
-    score = -f1_score(y_true=true_labels[0].cpu(), y_pred=preds[0].cpu())
+    score = -f1_score(y_true=true_labels[0], y_pred=preds[0])
     # Print the threshold and corresponding F1 score
     print(f"Threshold: {thr}, F1-score: {score}.")
     return score
