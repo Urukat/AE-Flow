@@ -42,14 +42,15 @@ def metrics(true, anomaly_scores, threshold):
 
     return results
 
-def cal_given_threshold(thr, anomaly_scores, true_labels):
+def cal_given_threshold(thr, anomaly_scores, labels):
     # Generate predictions based on the proposed threshold
-    preds = [score > thr for score in anomaly_scores]
+    pred = (anomaly_scores > thr).astype(int)
+    # preds = [score > thr for score in anomaly_scores]
     # Calculate the F1 score
-    score = -f1_score(y_true=true_labels[0], y_pred=preds[0])
+    # score = -f1_score(y_true=true_labels[0], y_pred=preds[0])
     # Print the threshold and corresponding F1 score
-    print(f"Threshold: {thr}, F1-score: {score}.")
-    return score
+    # print(f"Threshold: {thr}, F1-score: {score}.")
+    return -f1_score(y_true=labels, y_pred=pred)
 
 @torch.no_grad()
 def find_threshold(model, normal_loader, abnormal_loader):
@@ -64,6 +65,7 @@ def find_threshold(model, normal_loader, abnormal_loader):
         for score in anomaly_score:
             anomaly_scores.append(score)
             labels.append(0)
+        # break
     
     for i, (img, _) in tqdm(enumerate(abnormal_loader)):
         img = img.to(device)
@@ -73,10 +75,11 @@ def find_threshold(model, normal_loader, abnormal_loader):
         for score in anomaly_score:
             anomaly_scores.append(score)
             labels.append(1)
+        # break
     
-    best_f1_threshold = scipy.optimize.bisect(f=cal_given_threshold, a=np.min(anomaly_scores), b=np.max(anomaly_scores), args=(anomaly_scores, labels))
+    best_f1_threshold = scipy.optimize.fmin(cal_given_threshold, args=(anomaly_scores, labels), x0=np.mean(anomaly_scores))
     
-    return best_f1_threshold, labels
+    return best_f1_threshold[0], labels
 
 
 def train(args):
