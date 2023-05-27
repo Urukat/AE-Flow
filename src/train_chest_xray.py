@@ -93,7 +93,7 @@ def train(args):
         print(f"Optimal threshold: {optimal_threshold}")
         # get resutls of test set
         train_results = ut.get_test_results(model, beta, optimal_threshold, train_loader_normal, train_loader_pneumonia)
-        print(f"Epoch {epoch}: test results: {train_results}")
+        print(f"Epoch {epoch}: train results: {train_results}")
         test_results = ut.get_test_results(model, beta, optimal_threshold, test_loader_normal, test_loader_pneumonia)
         print(f"Epoch {epoch}: test results: {test_results}")
         # this is for test set
