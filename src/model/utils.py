@@ -31,31 +31,29 @@ def optimize_threshold(anomaly_scores, true_labels):
     return opt_threshold
 
 @torch.no_grad()
-def plot_distribution(model, beta, test_normal_loader, test_abnormal_loader, dataset_name, epoch):
+def plot_distribution(model, beta, normal_loader, abnormal_loader, dataset_name, epoch):
     device = "cuda" if torch.cuda.is_available() else "cpu"
     normal_anomaly_scores = []
     abnormal_anomaly_scores = []
-    for i, (img, label) in tqdm(enumerate(test_normal_loader)):
+    for i, (img, label) in tqdm(enumerate(normal_loader)):
         img = img.to(device)
         label = label.to(device)
 
         rec_img, z_hat, jac = model(img)
         flow_loss, log_z = model.flow_loss()
-        anomaly_score = model.anomaly_score(beta, log_z, img)
-        for score in anomaly_score.item():
+        anomaly_score = np.array(model.anomaly_score(beta, log_z, img))
+        for score in anomaly_score:
             normal_anomaly_scores.append(score)
-        # normal_anomaly_scores.append(anomaly_score.item())
         # break
     
-    for i, (img, label) in tqdm(enumerate(test_abnormal_loader)):
+    for i, (img, label) in tqdm(enumerate(abnormal_loader)):
         img = img.to(device)
         label = label.to(device)
 
         rec_img, z_hat, jac = model(img)
         flow_loss, log_z = model.flow_loss()
-        anomaly_score = model.anomaly_score(beta, log_z, img)
-        abnormal_anomaly_scores.append(anomaly_score.item())
-        for score in anomaly_score.item():
+        anomaly_score = np.array(model.anomaly_score(beta, log_z, img))
+        for score in anomaly_score:
             abnormal_anomaly_scores.append(score)
         # break
     
