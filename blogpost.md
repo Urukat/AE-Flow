@@ -125,7 +125,7 @@ In a semi-supervised setting, the model requires both labeled and unlabeled data
 
 Implementing a semi-supervised approach often involves developing additional techniques, such as designing appropriate loss functions, creating strategies for combining labeled and unlabeled data during training, and optimizing the model's performance with limited labeled samples. These tasks require in-depth knowledge and expertise in both unsupervised and semi-supervised learning, which were not readily available within the limited team.
 
-Additionally, the AE-FLOW model's original paper might not provide sufficient details or guidance on the specific techniques used for the semi-supervised setting. Reproducing a semi-supervised approach without clear instructions or insights can pose significant challenges, especially when dealing with complex models like AE-FLOW.
+Additionally, the AE-FLOW model's original paper did not provide sufficient details and guidance on the specific techniques used for the semi-supervised setting. Reproducing a semi-supervised approach without clear instructions or insights poses significant challenges for us, especially when dealing with complex models like AE-FLOW.
 
 ### 6) Limited time and resources:
 One of the difficulties we encountered during the reproduction of the AE-FLOW model was the constraint of limited time and resources. With only two people working on the project, there were limitations in terms of the available time and expertise to fully explore and address all aspects of the model.
