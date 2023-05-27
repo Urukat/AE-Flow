@@ -48,25 +48,25 @@ Unlike other flow models, AE-Flow can provide a certain degree of interpretabili
 # 2. Weaknesses/Strengths/Potential
 
 #### Weaknesses:
-1. Limited to self-supervised learning: The AE-FLOW model is limited to self-supervised learning, which means it can only be trained on normal data without any labeled anomalies. This may limit its ability to detect rare or novel anomalies that are not present in the training data.
+1) Limited to self-supervised learning: The AE-FLOW model is limited to self-supervised learning, which means it can only be trained on normal data without any labeled anomalies. This may limit its ability to detect rare or novel anomalies that are not present in the training data.
 
-2. Limited to image data: The AE-FLOW model is designed for anomaly detection in image data and may not be applicable to other types of data, such as text or audio.
+2) Limited to image data: The AE-FLOW model is designed for anomaly detection in image data and may not be applicable to other types of data, such as text or audio.
 
-3. Requires significant computational resources: The use of normalizing flow in the AE-FLOW model requires significant computational resources during training, which may limit its scalability to larger datasets.
+3) Requires significant computational resources: The use of normalizing flow in the AE-FLOW model requires significant computational resources during training, which may limit its scalability to larger datasets.
 
 #### Strengths:
-1. High accuracy: The AE-FLOW model achieves high accuracy in detecting anomalies in medical images compared to other state-of-the-art methods.
+1) High accuracy: The AE-FLOW model achieves high accuracy in detecting anomalies in medical images compared to other state-of-the-art methods.
 
-2. Interpretable results: The use of reconstruction-based methods at pixel-level in the AE-FLOW model allows for interpretable results that can help identify specific regions or features of an image that are anomalous.
+2) Interpretable results: The use of reconstruction-based methods at pixel-level in the AE-FLOW model allows for interpretable results that can help identify specific regions or features of an image that are anomalous.
 
-3. Efficient computation of likelihoods: The use of normalizing flow in the AE-FLOW model allows for efficient computation of likelihoods during training, which can improve its scalability and performance on larger datasets.
+3) Efficient computation of likelihoods: The use of normalizing flow in the AE-FLOW model allows for efficient computation of likelihoods during training, which can improve its scalability and performance on larger datasets.
 
 #### Potential:
-1. Transferability to other domains: The use of self-supervised learning and normalizing flow in the AE-FLOW model may have potential applications beyond anomaly detection in medical images, such as detecting anomalies in other types of image data or even non-image data such as time series or graphs.
+1) Transferability to other domains: The use of self-supervised learning and normalizing flow in the AE-FLOW model may have potential applications beyond anomaly detection in medical images, such as detecting anomalies in other types of image data or even non-image data such as time series or graphs.
 
-2. Integration with other models: The AE-FLOW model could potentially be integrated with other models such as generative adversarial networks (GANs) or variational auto-encoders (VAEs) to improve its performance on more complex datasets.
+2) Integration with other models: The AE-FLOW model could potentially be integrated with other models such as generative adversarial networks (GANs) or variational auto-encoders (VAEs) to improve its performance on more complex datasets.
 
-3. Real-world applications: The AE-FLOW model has potential applications in real-world scenarios such as medical diagnosis or quality control in manufacturing, where the ability to detect anomalies quickly and accurately can have significant impact.
+3) Real-world applications: The AE-FLOW model has potential applications in real-world scenarios such as medical diagnosis or quality control in manufacturing, where the ability to detect anomalies quickly and accurately can have significant impact.
 
 # 3. Novel Contribution
 
@@ -122,10 +122,10 @@ During the reproduction of the AE-FLOW model, we encountered several challenges 
 One of the main challenges we faced was the limited availability of accurately labeled anomaly data. Anomaly detection tasks often require a substantial amount of labeled data, including both normal and anomalous instances, to train and evaluate the model effectively. However, obtaining labeled anomaly data can be difficult and time-consuming, especially in the medical domain. We had to carefully curate and verify the available labeled data to ensure its quality and reliability. Additionally, we explored strategies to augment the labeled anomaly data through techniques like data synthesis or active learning.
 
 ### 2) Hyperparameter tuning:
-Another challenge we encountered was the need for extensive hyperparameter tuning to achieve optimal performance of the AE-FLOW model. When finding the right combination of hyperparameters, such as learning rate, batch size, number of flow steps, and latent space dimension, we found it very time-consuming and it is an iterative process. We experimented with different values for each hyperparameter,and analyzed the impact of each setting on the model's performance. This required computational resources and careful monitoring to ensure that the model converged to a satisfactory solution.
+Another challenge we encountered was the need for extensive hyperparameter tuning to achieve optimal performance of the AE-FLOW model. During the process of finding the right combination of hyperparameters, such as learning rate, batch size, number of flow steps, and latent space dimension, we found it very time-consuming and it is an iterative process. We experimented with different values for each hyperparameter,and analyzed the impact of each setting on the model's performance. This required computational resources and careful monitoring to ensure that the model converged to a satisfactory solution.
 
 ### 3) Computational resource requirements:
-The AE-FLOW model, especially when incorporating normalizing flow methods, can be computationally intensive, requiring significant computational resources. Training deep learning models on large-scale medical image datasets demands high-performance hardware such as GPUs or TPUs. Ensuring access to these resources and optimizing their utilization were essential for efficient experimentation. We faced challenges in managing the computational demands, including long training times, memory limitations, and scheduling resource allocation. We tried to train the model using both Google Colab and Lisa, and had to balance the complexity of the model architecture and dataset size with the available resources to ensure timely completion of our experiments.
+The AE-FLOW model, especially when incorporating normalizing flow methods, can be computationally intensive, requiring significant computational resources. Training deep learning models on large-scale medical image datasets demands high-performance hardware such as GPUs. Ensuring access to these resources and optimizing their utilization were essential for efficient experimentation. We faced challenges in managing the computational demands, including long training times, memory limitations, and scheduling resource allocation. We tried to train the model using both Google Colab and Lisa, and had to balance the complexity of the model architecture and dataset size with the available resources to ensure timely completion of our experiments.
 
 ### 4) Interpretability and analysis of results:
 While the AE-FLOW model provides pixel-level interpretability of anomaly data, interpreting and analyzing the model's results can still be challenging. Understanding the underlying reasons for the model's predictions and identifying false positives or false negatives requires expertise in both anomaly detection and medical imaging. We faced difficulties in accurately interpreting the visualizations and residual images provided by the model. Additionally, effectively communicating and presenting the results to stakeholders or medical professionals required careful consideration of the most appropriate visual representations and metrics. 
@@ -133,9 +133,7 @@ While the AE-FLOW model provides pixel-level interpretability of anomaly data, i
 ### 5) Possibility of successfully incorporating semi-supervised approach is low:
 The original AE-FLOW model proposed a combination of unsupervised learning with limited labeled data to achieve superior performance. However, due to various constraints, we found it challenging to effectively incorporate this semi-supervised approach into our reproduction.
 
-In a semi-supervised setting, the model requires both labeled and unlabeled data to learn from. Acquiring labeled data can be costly, time-consuming, and sometimes challenging in domains such as medical imaging, where expert annotations are required. Limited resources, including time and personnel, restricted our ability to gather a significant amount of labeled data for training.
-
-Implementing a semi-supervised approach often involves developing additional techniques, such as designing appropriate loss functions, creating strategies for combining labeled and unlabeled data during training, and optimizing the model's performance with limited labeled samples. These tasks require in-depth knowledge and expertise in both unsupervised and semi-supervised learning, which were not readily available within the limited team.
+In a semi-supervised setting, the model requires both labeled and unlabeled data to learn from. Acquiring labeled data can be costly, time-consuming, and sometimes challenging in domains such as medical imaging, where expert annotations are required. Limited resources, including time and personnel, restricted our ability to gather a significant amount of labeled data for training. Implementing a semi-supervised approach often involves developing additional techniques, such as designing appropriate loss functions, creating strategies for combining labeled and unlabeled data during training, and optimizing the model's performance with limited labeled samples. These tasks require in-depth knowledge and expertise in both unsupervised and semi-supervised learning, which were not readily available within the limited team.
 
 Additionally, the AE-FLOW model's original paper did not provide sufficient details and guidance on the specific techniques used for the semi-supervised setting. Reproducing a semi-supervised approach without clear instructions or insights poses significant challenges for us, especially when dealing with complex models like AE-FLOW.
 
