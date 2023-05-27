@@ -11,8 +11,10 @@ from dataloader import ChestXrayDataset
 def train(args):
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model = ae_flow.AE_FLOW(subnet=args.subnet)
-    train_set = ChestXrayDataset(root="./data", name='chest_xray', split='train', label='NORMAL')
-    train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True)
+    train_set_normal = ChestXrayDataset(root="./data", name='chest_xray', split='train', label='NORMAL')
+    train_loader_normal = DataLoader(train_set_normal, batch_size=batch_size, shuffle=True)
+    train_set_pneumonia = ChestXrayDataset(root="./data", name='chest_xray', split='train', label='PNEUMONIA')
+    train_loader_pneumonia = DataLoader(train_set_pneumonia, batch_size=batch_size, shuffle=True)
 
     test_set_normal = ChestXrayDataset(root="./data", name='chest_xray', split='test', label='NORMAL')
     test_set_pneumonia = ChestXrayDataset(root="./data", name='chest_xray', split='test', label='PNEUMONIA')
@@ -27,7 +29,7 @@ def train(args):
         epoch_loss = 0.0
         anomaly_scores = []
         # label always is normal(0)
-        for i, (img, _) in tqdm(enumerate(train_loader)):
+        for i, (img, _) in tqdm(enumerate(train_loader_normal)):
             img = img.to(device)
             rec_img, z_hat, jac = model(img)
             recon_loss = torch.nn.functional.mse_loss(rec_img, img)
@@ -50,8 +52,10 @@ def train(args):
             # do not know if this works
             # torch.cuda.empty_cache()
         
-        ut.plot_distribution(model, beta, test_loader_normal, test_loader_pneumonia, "chest_xray", epoch)
-
+        # this is for test set
+        ut.plot_distribution(model, beta, test_loader_normal, test_loader_pneumonia, "chest_xray_test", epoch)
+        ut.plot_distribution(model, beta, train_loader_normal, train_loader_pneumonia, "chest_xray_train", epoch)
+        # threshold = find_threshold(train_loader_normal, train_loader_pneumonia)
 
     torch.save(model, "./src/checkpoint/{}_{}.pt".format(args.subnet, args.epochs))              
     print(f"Train: epoch {epoch}, anomaly_score : {torch.sum(torch.stack(anomaly_scores))} train loss = {epoch_loss}")
