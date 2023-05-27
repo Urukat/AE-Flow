@@ -52,15 +52,15 @@ def metrics(labels, anomaly_scores, threshold):
     # print(len())
     # Calculate true positive (tp), false positive (fp), false negative (fn), true negative (tn)
     pred = (anomaly_scores > threshold).astype(int)
-    # tp = sum(labels[i] == 1 and anomaly_scores[i] >= threshold for i in range(len(labels)))
-    # fp = sum(labels[i] == 0 and anomaly_scores[i] >= threshold for i in range(len(labels)))
-    # fn = sum(labels[i] == 1 and anomaly_scores[i] < threshold for i in range(len(labels)))
-    # tn = sum(labels[i] == 0 and anomaly_scores[i] < threshold for i in range(len(labels)))
+    tp = sum(labels[i] == 1 and pred[i] == 1 for i in range(len(labels)))
+    fp = sum(labels[i] == 0 and pred[i] == 1 for i in range(len(labels)))
+    fn = sum(labels[i] == 1 and pred[i] == 0 for i in range(len(labels)))
+    tn = sum(labels[i] == 0 and pred[i] == 0 for i in range(len(labels)))
 
     # # Calculate true positive rate (sensitivity/recall)
-    # sen = tp / (tp + fn)
+    sen = tp / (tp + fn)
     # # Calculate true negative rate (specificity)
-    # spe = tn / (tn + fp)
+    spe = tn / (tn + fp)
     # # Calculate accuracy
     # acc = (tp + tn) / (tp + fp + fn + tn)
     # # Calculate F1 score
@@ -73,8 +73,8 @@ def metrics(labels, anomaly_scores, threshold):
     # Store the results
     results['AUC'] = auc_score
     results['ACC'] = accuracy_score(y_pred=pred, y_true=labels)
-    # results['SEN'] = 
-    # results['SPE'] = spe
+    results['SEN'] = sen
+    results['SPE'] = spe
     results['F1'] = f1_score(y_pred=pred, y_true=labels)
 
     return results
