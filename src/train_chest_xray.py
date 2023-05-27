@@ -8,6 +8,22 @@ from tqdm import tqdm
 from HYPERPARAMETER import alpha, beta, batch_size, log_frequency
 from dataloader import ChestXrayDataset
 
+# @torch.no_grad()
+# def find_threshold(model, normal_loader, abnormal_loader):
+#     device = "cuda" if torch.cuda.is_available() else "cpu"
+#     anomaly_scores = []
+#     labels = []
+#     for i, (img, _) in tqdm(enumerate(normal_loader)):
+#         img = img.to(device)
+#         rec_img, z_hat, jac = model(img)
+#         flow_loss, log_z = model.flow_loss()
+#         anomaly_score = model.anomaly_score(beta, log_z, img)
+#         anomaly_scores.append(anomaly_score)
+#         labels.append()
+#     for i, (img, _) in tqdm(enumerate(abnormal_loader)):
+
+#     pass
+
 def train(args):
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model = ae_flow.AE_FLOW(subnet=args.subnet)
@@ -44,10 +60,10 @@ def train(args):
 
             anomaly_score = model.anomaly_score(beta, log_z, img)
             anomaly_scores.append(anomaly_score)
-            if(i % log_frequency == 0):
-                print(recon_loss)
-                print(flow_loss)    
-                print(loss)   
+            # if(i % log_frequency == 0):
+            #     print(recon_loss)
+            #     print(flow_loss)    
+            #     print(loss)   
             
             # do not know if this works
             # torch.cuda.empty_cache()
@@ -55,7 +71,7 @@ def train(args):
         # this is for test set
         ut.plot_distribution(model, beta, test_loader_normal, test_loader_pneumonia, "chest_xray_test", epoch)
         ut.plot_distribution(model, beta, train_loader_normal, train_loader_pneumonia, "chest_xray_train", epoch)
-        # threshold = find_threshold(train_loader_normal, train_loader_pneumonia)
+        # threshold = find_threshold(model, train_loader_normal, train_loader_pneumonia)
 
     torch.save(model, "./src/checkpoint/{}_{}.pt".format(args.subnet, args.epochs))              
     print(f"Train: epoch {epoch}, anomaly_score : {torch.sum(torch.stack(anomaly_scores))} train loss = {epoch_loss}")
