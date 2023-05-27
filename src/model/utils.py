@@ -41,7 +41,7 @@ def plot_distribution(model, beta, normal_loader, abnormal_loader, dataset_name,
 
         rec_img, z_hat, jac = model(img)
         flow_loss, log_z = model.flow_loss()
-        anomaly_score = np.array(model.anomaly_score(beta, log_z, img))
+        anomaly_score = np.array(model.anomaly_score(beta, log_z, img).cpu())
         for score in anomaly_score:
             normal_anomaly_scores.append(score)
         # break
@@ -52,7 +52,7 @@ def plot_distribution(model, beta, normal_loader, abnormal_loader, dataset_name,
 
         rec_img, z_hat, jac = model(img)
         flow_loss, log_z = model.flow_loss()
-        anomaly_score = np.array(model.anomaly_score(beta, log_z, img))
+        anomaly_score = np.array(model.anomaly_score(beta, log_z, img).cpu())
         for score in anomaly_score:
             abnormal_anomaly_scores.append(score)
         # break
