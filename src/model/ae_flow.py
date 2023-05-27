@@ -40,10 +40,10 @@ class AE_FLOW(nn.Module):
         # experimental code
         # Option 1, use log_z_hat instead of p_z_hat
         shape = self.z_hat.shape[1:]
-        # Sflow = -distributions.StandardNormal(shape=shape).log_prob(self.z_hat) / np.prod(shape)
+        Sflow = -distributions.StandardNormal(shape=shape).log_prob(self.z_hat) / np.prod(shape)
         # Option 2, follow the original paper use p_z_hat 
-        Sflow = -torch.exp(distributions.StandardNormal(shape=shape).log_prob(self.z_hat) / np.prod(shape))
-        
+        # Sflow = -torch.exp(distributions.StandardNormal(shape=shape).log_prob(self.z_hat) / np.prod(shape))
+        # Sflow = -log_z
         Srecon = -structural_similarity_index_measure(preds=self.rec_img, target=img, kernel_size=11, reduction='sum')        
         print("Srecon: {}".format(Srecon))
         print("Sflow: {}".format(Sflow) )
