@@ -1,28 +1,83 @@
 import os.path as osp
 import argparse
 import torch
+import numpy as np
 from torch.utils.data import DataLoader
 from model import ae_flow
 import model.utils as ut
 from tqdm import tqdm
+import scipy
+from sklearn.metrics import accuracy_score, f1_score, roc_curve, auc
 from HYPERPARAMETER import alpha, beta, batch_size, log_frequency
 from dataloader import ChestXrayDataset
 
-# @torch.no_grad()
-# def find_threshold(model, normal_loader, abnormal_loader):
-#     device = "cuda" if torch.cuda.is_available() else "cpu"
-#     anomaly_scores = []
-#     labels = []
-#     for i, (img, _) in tqdm(enumerate(normal_loader)):
-#         img = img.to(device)
-#         rec_img, z_hat, jac = model(img)
-#         flow_loss, log_z = model.flow_loss()
-#         anomaly_score = model.anomaly_score(beta, log_z, img)
-#         anomaly_scores.append(anomaly_score)
-#         labels.append()
-#     for i, (img, _) in tqdm(enumerate(abnormal_loader)):
+def metrics(true, anomaly_scores, threshold):
+    results = {}
 
-#     pass
+    # Calculate true positive (tp), false positive (fp), false negative (fn), true negative (tn)
+    tp = sum(true[i] == 1 and anomaly_scores[i] >= threshold for i in range(len(true)))
+    fp = sum(true[i] == 0 and anomaly_scores[i] >= threshold for i in range(len(true)))
+    fn = sum(true[i] == 1 and anomaly_scores[i] < threshold for i in range(len(true)))
+    tn = sum(true[i] == 0 and anomaly_scores[i] < threshold for i in range(len(true)))
+
+    # Calculate true positive rate (sensitivity/recall)
+    sen = tp / (tp + fn)
+    # Calculate true negative rate (specificity)
+    spe = tn / (tn + fp)
+    # Calculate accuracy
+    acc = (tp + tn) / (tp + fp + fn + tn)
+    # Calculate F1 score
+    f1 = (2 * tp) / (2 * tp + fp + fn)
+    # Calculate ROC curve
+    fpr, tpr, _ = roc_curve(true, anomaly_scores)
+    # Calculate AUC
+    auc_score = auc(fpr, tpr)
+
+    # Store the results
+    results['AUC'] = auc_score
+    results['ACC'] = acc
+    results['SEN'] = sen
+    results['SPE'] = spe
+    results['F1'] = f1
+
+    return results
+
+def cal_given_threshold(thr, anomaly_scores, true_labels):
+    # Generate predictions based on the proposed threshold
+    preds = [score > thr for score in anomaly_scores]
+    # Calculate the F1 score
+    score = -f1_score(y_true=true_labels[0].cpu(), y_pred=preds[0].cpu())
+    # Print the threshold and corresponding F1 score
+    print(f"Threshold: {thr}, F1-score: {score}.")
+    return score
+
+@torch.no_grad()
+def find_threshold(model, normal_loader, abnormal_loader):
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    anomaly_scores = []
+    labels = []
+    for i, (img, _) in tqdm(enumerate(normal_loader)):
+        img = img.to(device)
+        rec_img, z_hat, jac = model(img)
+        flow_loss, log_z = model.flow_loss()
+        anomaly_score = np.array(model.anomaly_score(beta, log_z, img)).cpu()
+        for score in anomaly_score:
+            anomaly_scores.append(score)
+            labels.append(0)
+    
+    for i, (img, _) in tqdm(enumerate(abnormal_loader)):
+        img = img.to(device)
+        rec_img, z_hat, jac = model(img)
+        flow_loss, log_z = model.flow_loss()
+        anomaly_score = np.array(model.anomaly_score(beta, log_z, img)).cpu()
+        for score in anomaly_score:
+            anomaly_scores.append(score)
+            labels.append(1)
+    
+    best_f1_threshold = scipy.optimize.bisect(f=cal_given_threshold, a=np.min(anomaly_scores), b=np.max(anomaly_scores), args=(anomaly_scores, labels))
+    
+    return best_f1_threshold, labels
+
 
 def train(args):
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -63,11 +118,13 @@ def train(args):
             
             # do not know if this works
             # torch.cuda.empty_cache()
-        
+        optimal_threshold, labels = find_threshold(model, train_loader_normal, train_loader_pneumonia)
+        results = metrics(labels, anomaly_scores, optimal_threshold)
+        print(f"Optimal threshold: {optimal_threshold}")
+        print(f"Epoch {epoch}: {results}")
         # this is for test set
-        ut.plot_distribution(model, beta, test_loader_normal, test_loader_pneumonia, "chest_xray_test", epoch)
-        ut.plot_distribution(model, beta, train_loader_normal, train_loader_pneumonia, "chest_xray_train", epoch)
-        # threshold = find_threshold(model, train_loader_normal, train_loader_pneumonia)
+        # ut.plot_distribution(model, beta, test_loader_normal, test_loader_pneumonia, "chest_xray_test", epoch)
+        # ut.plot_distribution(model, beta, train_loader_normal, train_loader_pneumonia, "chest_xray_train", epoch)
 
     torch.save(model, "./src/checkpoint/{}_{}.pt".format(args.subnet, args.epochs))              
     print(f"Train: epoch {epoch}, anomaly_score : {torch.sum(torch.stack(anomaly_scores))} train loss = {epoch_loss}")
