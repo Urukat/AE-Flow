@@ -102,11 +102,48 @@ We trained the AE-FLOW model using both self-supervised and semi-supervised appr
 
 Once we were satisfied with our trained AE-FLOW model's performance on our medical image dataset, we deployed it for anomaly detection tasks in real-world applications.
 
-### Difficulties
+### Training Results:
 
-#### 1) 
+To further confirm the efficacy, the distribution curves representing the computed anomaly scores for both categories, namely normal and anomaly, are depicted in the provided Figure, which is one of the figures we got during training. The color red represents anomaly data, while green signifies normal data; the x-axis illustrates the anomaly score, while the y-axis represents the probability density. Notably, the anomaly data consistently exhibits higher predicted anomaly scores compared to the normal data. Additionally, the overlapping area between the two curves is relatively small, constituting only a minor proportion of the total area. Each curve also possesses a distinct peak, affirming the validity and effectiveness of the proposed anomaly score function as a reliable measure for distinguishing normal and abnormal samples. 
 
-# 5. Conclusion
+![20](./figures/chest_xray_train_20.png)
+
+|   |   |   |   |   |
+|---|---|---|---|---|
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
+
+# 5. Difficulties
+
+During the reproduction of the AE-FLOW model, we encountered several challenges that required careful attention and problem-solving. These difficulties include:
+
+### 1) Limited availability of labeled anomaly data:
+One of the main challenges we faced was the limited availability of accurately labeled anomaly data. Anomaly detection tasks often require a substantial amount of labeled data, including both normal and anomalous instances, to train and evaluate the model effectively. However, obtaining labeled anomaly data can be difficult and time-consuming, especially in the medical domain. We had to carefully curate and verify the available labeled data to ensure its quality and reliability. Additionally, we explored strategies to augment the labeled anomaly data through techniques like data synthesis or active learning.
+
+### 2) Hyperparameter tuning:
+Another challenge we encountered was the need for extensive hyperparameter tuning to achieve optimal performance of the AE-FLOW model. When finding the right combination of hyperparameters, such as learning rate, batch size, number of flow steps, and latent space dimension, we found it very time-consuming and it is an iterative process. We experimented with different values for each hyperparameter,and analyzed the impact of each setting on the model's performance. This required computational resources and careful monitoring to ensure that the model converged to a satisfactory solution.
+
+### 3) Computational resource requirements:
+The AE-FLOW model, especially when incorporating normalizing flow methods, can be computationally intensive, requiring significant computational resources. Training deep learning models on large-scale medical image datasets demands high-performance hardware such as GPUs or TPUs. Ensuring access to these resources and optimizing their utilization were essential for efficient experimentation. We faced challenges in managing the computational demands, including long training times, memory limitations, and scheduling resource allocation. We tried to train the model using both Google Colab and Lisa, and had to balance the complexity of the model architecture and dataset size with the available resources to ensure timely completion of our experiments.
+
+### 4) Interpretability and analysis of results:
+While the AE-FLOW model provides pixel-level interpretability of anomaly data, interpreting and analyzing the model's results can still be challenging. Understanding the underlying reasons for the model's predictions and identifying false positives or false negatives requires expertise in both anomaly detection and medical imaging. We faced difficulties in accurately interpreting the visualizations and residual images provided by the model. Additionally, effectively communicating and presenting the results to stakeholders or medical professionals required careful consideration of the most appropriate visual representations and metrics. 
+
+### 5) Possibility of successfully incorporating semi-supervised approach is low:
+The original AE-FLOW model proposed a combination of unsupervised learning with limited labeled data to achieve superior performance. However, due to various constraints, we found it challenging to effectively incorporate this semi-supervised approach into our reproduction.
+
+In a semi-supervised setting, the model requires both labeled and unlabeled data to learn from. Acquiring labeled data can be costly, time-consuming, and sometimes challenging in domains such as medical imaging, where expert annotations are required. Limited resources, including time and personnel, restricted our ability to gather a significant amount of labeled data for training.
+
+Implementing a semi-supervised approach often involves developing additional techniques, such as designing appropriate loss functions, creating strategies for combining labeled and unlabeled data during training, and optimizing the model's performance with limited labeled samples. These tasks require in-depth knowledge and expertise in both unsupervised and semi-supervised learning, which were not readily available within the limited team.
+
+Additionally, the AE-FLOW model's original paper did not provide sufficient details and guidance on the specific techniques used for the semi-supervised setting. Reproducing a semi-supervised approach without clear instructions or insights poses significant challenges for us, especially when dealing with complex models like AE-FLOW.
+
+### 6) Limited time and resources:
+One of the difficulties we encountered during the reproduction of the AE-FLOW model was the constraint of limited time and resources. With only two people working on the project, there were limitations in terms of the available time and expertise to fully explore and address all aspects of the model.
+
+
+# 6. Conclusion
 
 In conclusion, we successfully reproduced the AE-FLOW model proposed in the paper for anomaly detection in medical images. Our pipeline included data preparation, model architecture implementation, training, evaluation, fine-tuning, and deployment. We evaluated our trained model's performance using multiple metrics and compared our results with those reported in the original paper to ensure reproducibility.
 
@@ -114,13 +151,13 @@ Our results showed that the AE-FLOW model is effective and robust for detecting 
 
 Overall, our project demonstrates the importance of reproducibility in machine learning research and highlights the potential of the AE-FLOW model for medical anomaly detection. Future work could explore its application to other types of medical imaging modalities or investigate its performance on larger datasets with more complex anomalies.
 
-# 6. Groupmates Contribution
+# 7. Groupmates Contribution
 
-Yikun GU: study the model structure, construct the repository, and write blogpost.
+Yikun GU: study the model structure, construct the repository, research on the novel approaches, and write blogpost.
 
-Pengfei HU: study codes, reproduce other implementations, and run experiments.
+Pengfei HU: study the original codes, reproduce other implementations, debugging, and run experiments.
 
-# 7. Related Works
+# 8. Related Works
 An, J. (2015). Variational autoencoder based anomaly detection using reconstruction probability. SNU Data Mining Center, 2, 1. https://cir.nii.ac.jp/ja/crid/1370848655242575246 
 
 Dalca, A., V. (2019, April 25). Unsupervised Deep Learning for Bayesian Brain MRI Segmentation. arXiv.org. https://arxiv.org/abs/1904.11319 
