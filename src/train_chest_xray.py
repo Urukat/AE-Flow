@@ -14,7 +14,7 @@ from dataloader import ChestXrayDataset
 def cal_given_threshold(thr, anomaly_scores, labels):
     # Generate predictions based on the proposed threshold
     pred = (anomaly_scores > thr).astype(int)
-    return -accuracy_score(y_true=labels, y_pred=pred)
+    return -f1_score(y_true=labels, y_pred=pred)
 
 @torch.no_grad()
 def find_threshold(model, normal_loader, abnormal_loader):
