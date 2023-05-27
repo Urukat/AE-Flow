@@ -22,7 +22,7 @@ def train(args):
     optimizer = optimizer = torch.optim.Adam(model.parameters(), lr = 1e-4)
     model.to(device)
 
-    for epoch in range(epochs):
+    for epoch in range(args.epochs):
         model.train()
         epoch_loss = 0.0
         anomaly_scores = []
@@ -59,5 +59,6 @@ def train(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--subnet', default='conv_type', type=str)
+    parser.add_argument('--epochs', default=100, type=int)
     args = parser.parse_args()
     train(args)
