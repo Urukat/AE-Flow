@@ -92,9 +92,10 @@ def train(args):
         optimal_threshold = find_threshold(model, train_loader_normal, train_loader_pneumonia)
         print(f"Optimal threshold: {optimal_threshold}")
         # get resutls of test set
-        results = ut.get_test_results(model, beta, optimal_threshold, test_loader_normal, test_loader_pneumonia)
-        
-        print(f"Epoch {epoch}: {results}")
+        train_results = ut.get_test_results(model, beta, optimal_threshold, train_loader_normal, train_loader_pneumonia)
+        print(f"Epoch {epoch}: test results: {train_results}")
+        test_results = ut.get_test_results(model, beta, optimal_threshold, test_loader_normal, test_loader_pneumonia)
+        print(f"Epoch {epoch}: test results: {test_results}")
         # this is for test set
         # ut.plot_distribution(model, beta, test_loader_normal, test_loader_pneumonia, "chest_xray_test", epoch)
         # ut.plot_distribution(model, beta, train_loader_normal, train_loader_pneumonia, "chest_xray_train", epoch)
