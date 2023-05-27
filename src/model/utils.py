@@ -33,8 +33,8 @@ def optimize_threshold(anomaly_scores, true_labels):
 @torch.no_grad()
 def plot_distribution(model, beta, test_normal_loader, test_abnormal_loader, dataset_name, epoch):
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    normal_anomaly_scores = np.array([])
-    abnormal_anomaly_scores = np.array([])
+    normal_anomaly_scores = []
+    abnormal_anomaly_scores = []
     for i, (img, label) in tqdm(enumerate(test_normal_loader)):
         img = img.to(device)
         label = label.to(device)
@@ -57,6 +57,8 @@ def plot_distribution(model, beta, test_normal_loader, test_abnormal_loader, dat
     
     ana_min = -min(normal_anomaly_scores + abnormal_anomaly_scores)
     ana_max = -max(normal_anomaly_scores + abnormal_anomaly_scores)
+    normal_anomaly_scores = np.array(normal_anomaly_scores)
+    abnormal_anomaly_scores = np.array(abnormal_anomaly_scores)
     normal_anomaly_scores += ana_max
     abnormal_anomaly_scores += ana_max
 
