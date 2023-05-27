@@ -102,6 +102,12 @@ We trained the AE-FLOW model using both self-supervised and semi-supervised appr
 
 Once we were satisfied with our trained AE-FLOW model's performance on our medical image dataset, we deployed it for anomaly detection tasks in real-world applications.
 
+### Training Results:
+
+
+
+![20](./figures/chest_xray_train_20.png)
+
 # 5. Difficulties
 
 During the reproduction of the AE-FLOW model, we encountered several challenges that required careful attention and problem-solving. These difficulties include:
