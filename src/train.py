@@ -53,7 +53,7 @@ def train(args):
         ut.plot_distribution(model, beta, test_loader_normal, test_loader_pneumonia, "chest_xray", epoch)
 
 
-    torch.save(model, "./src/checkpoint/{}_{}.pt".format(args.subnet, epochs))              
+    torch.save(model, "./src/checkpoint/{}_{}.pt".format(args.subnet, args.epochs))              
     print(f"Train: epoch {epoch}, anomaly_score : {torch.sum(torch.stack(anomaly_scores))} train loss = {epoch_loss}")
 
 if __name__ == "__main__":
