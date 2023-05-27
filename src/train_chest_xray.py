@@ -11,37 +11,6 @@ from sklearn.metrics import accuracy_score, f1_score, roc_curve, auc
 from HYPERPARAMETER import alpha, beta, batch_size, log_frequency
 from dataloader import ChestXrayDataset
 
-def metrics(true, anomaly_scores, threshold):
-    results = {}
-
-    # Calculate true positive (tp), false positive (fp), false negative (fn), true negative (tn)
-    tp = sum(true[i] == 1 and anomaly_scores[i] >= threshold for i in range(len(true)))
-    fp = sum(true[i] == 0 and anomaly_scores[i] >= threshold for i in range(len(true)))
-    fn = sum(true[i] == 1 and anomaly_scores[i] < threshold for i in range(len(true)))
-    tn = sum(true[i] == 0 and anomaly_scores[i] < threshold for i in range(len(true)))
-
-    # Calculate true positive rate (sensitivity/recall)
-    sen = tp / (tp + fn)
-    # Calculate true negative rate (specificity)
-    spe = tn / (tn + fp)
-    # Calculate accuracy
-    acc = (tp + tn) / (tp + fp + fn + tn)
-    # Calculate F1 score
-    f1 = (2 * tp) / (2 * tp + fp + fn)
-    # Calculate ROC curve
-    fpr, tpr, _ = roc_curve(true, anomaly_scores)
-    # Calculate AUC
-    auc_score = auc(fpr, tpr)
-
-    # Store the results
-    results['AUC'] = auc_score
-    results['ACC'] = acc
-    results['SEN'] = sen
-    results['SPE'] = spe
-    results['F1'] = f1
-
-    return results
-
 def cal_given_threshold(thr, anomaly_scores, labels):
     # Generate predictions based on the proposed threshold
     pred = (anomaly_scores > thr).astype(int)
@@ -54,6 +23,7 @@ def cal_given_threshold(thr, anomaly_scores, labels):
 
 @torch.no_grad()
 def find_threshold(model, normal_loader, abnormal_loader):
+    # find best threshold by calculating 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     anomaly_scores = []
     labels = []
@@ -79,7 +49,7 @@ def find_threshold(model, normal_loader, abnormal_loader):
     
     best_f1_threshold = scipy.optimize.fmin(cal_given_threshold, args=(anomaly_scores, labels), x0=np.mean(anomaly_scores))
     
-    return best_f1_threshold[0], labels
+    return best_f1_threshold[0]
 
 
 def train(args):
@@ -118,12 +88,17 @@ def train(args):
 
             anomaly_score = model.anomaly_score(beta, log_z, img)
             anomaly_scores.append(anomaly_score)
+            # break
             
+        model.eval()
             # do not know if this works
             # torch.cuda.empty_cache()
-        optimal_threshold, labels = find_threshold(model, train_loader_normal, train_loader_pneumonia)
-        results = metrics(labels, anomaly_scores, optimal_threshold)
+        # find threshold from training data
+        optimal_threshold = find_threshold(model, train_loader_normal, train_loader_pneumonia)
         print(f"Optimal threshold: {optimal_threshold}")
+        # get resutls of test set
+        results = ut.get_test_results(model, beta, optimal_threshold, test_loader_normal, test_loader_pneumonia)
+        
         print(f"Epoch {epoch}: {results}")
         # this is for test set
         # ut.plot_distribution(model, beta, test_loader_normal, test_loader_pneumonia, "chest_xray_test", epoch)
