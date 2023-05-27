@@ -5,31 +5,6 @@ from tqdm import tqdm
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score, f1_score, roc_curve, auc
 
-def cal_given_threshold(thr, anomaly_scores, true_labels):
-    # Generate predictions based on the proposed threshold
-    preds = [score > thr for score in anomaly_scores]
-    # Calculate the F1 score
-    score = -f1_score(y_true=true_labels[0].cpu(), y_pred=preds[0].cpu())
-    # Print the threshold and corresponding F1 score
-    print(f"Threshold: {thr}, F1-score: {score}.")
-    return score
-
-
-def optimize_threshold(anomaly_scores, true_labels):
-    # Flatten the anomaly scores list
-    anomaly_scores_flat = [tensor.cpu().numpy() for tensor in anomaly_scores]
-    anomaly_scores_flat = [i for sublist in anomaly_scores_flat for i in sublist]
-
-    # Set the lower and upper bounds for the bisection search
-    lower_bound = np.partition(anomaly_scores_flat, 10)[10]
-    upper_bound = np.partition(anomaly_scores_flat, -10)[-10]
-
-    # Perform bisection search to find the optimal threshold
-    opt_threshold = scipy.optimize.bisect(f=cal_given_threshold, a=lower_bound, b=upper_bound,
-                                          args=(anomaly_scores, true_labels))
-
-    return opt_threshold
-
 @torch.no_grad()
 def plot_distribution(model, beta, normal_loader, abnormal_loader, dataset_name, epoch):
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -76,30 +51,31 @@ def metrics(labels, anomaly_scores, threshold):
     results = {}
     # print(len())
     # Calculate true positive (tp), false positive (fp), false negative (fn), true negative (tn)
-    tp = sum(labels[i] == 1 and anomaly_scores[i] >= threshold for i in range(len(labels)))
-    fp = sum(labels[i] == 0 and anomaly_scores[i] >= threshold for i in range(len(labels)))
-    fn = sum(labels[i] == 1 and anomaly_scores[i] < threshold for i in range(len(labels)))
-    tn = sum(labels[i] == 0 and anomaly_scores[i] < threshold for i in range(len(labels)))
+    pred = (anomaly_scores > threshold).astype(int)
+    # tp = sum(labels[i] == 1 and anomaly_scores[i] >= threshold for i in range(len(labels)))
+    # fp = sum(labels[i] == 0 and anomaly_scores[i] >= threshold for i in range(len(labels)))
+    # fn = sum(labels[i] == 1 and anomaly_scores[i] < threshold for i in range(len(labels)))
+    # tn = sum(labels[i] == 0 and anomaly_scores[i] < threshold for i in range(len(labels)))
 
-    # Calculate true positive rate (sensitivity/recall)
-    sen = tp / (tp + fn)
-    # Calculate true negative rate (specificity)
-    spe = tn / (tn + fp)
-    # Calculate accuracy
-    acc = (tp + tn) / (tp + fp + fn + tn)
-    # Calculate F1 score
-    f1 = (2 * tp) / (2 * tp + fp + fn)
-    # Calculate ROC curve
+    # # Calculate true positive rate (sensitivity/recall)
+    # sen = tp / (tp + fn)
+    # # Calculate true negative rate (specificity)
+    # spe = tn / (tn + fp)
+    # # Calculate accuracy
+    # acc = (tp + tn) / (tp + fp + fn + tn)
+    # # Calculate F1 score
+    # f1 = (2 * tp) / (2 * tp + fp + fn)
+    # # Calculate ROC curve
     fpr, tpr, _ = roc_curve(labels, anomaly_scores)
     # Calculate AUC
     auc_score = auc(fpr, tpr)
 
     # Store the results
     results['AUC'] = auc_score
-    results['ACC'] = acc
-    results['SEN'] = sen
-    results['SPE'] = spe
-    results['F1'] = f1
+    results['ACC'] = accuracy_score(y_pred=pred, y_true=labels)
+    # results['SEN'] = 
+    # results['SPE'] = spe
+    results['F1'] = f1_score(y_pred=pred, y_true=labels)
 
     return results
 
