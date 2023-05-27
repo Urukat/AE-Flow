@@ -5,7 +5,7 @@ from torch.utils.data import DataLoader
 from model import ae_flow
 import model.utils as ut
 from tqdm import tqdm
-from HYPERPARAMETER import alpha, beta, batch_size, epochs, log_frequency
+from HYPERPARAMETER import alpha, beta, batch_size, log_frequency
 from dataloader import ChestXrayDataset
 
 def train(args):
