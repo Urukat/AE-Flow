@@ -104,7 +104,11 @@ Once we were satisfied with our trained AE-FLOW model's performance on our medic
 
 ### Training Results:
 
-
+|   |   |   |   |   |
+|---|---|---|---|---|
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
 
 ![20](./figures/chest_xray_train_20.png)
 
