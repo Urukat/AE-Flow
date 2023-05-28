@@ -96,7 +96,7 @@ Overall, by extending the evaluation process through the utilization of multiple
 
 To reproduce the AE-FLOW model, we followed a pipeline that includes data preparation, model architecture implementation, training, evaluation, fine-tuning, and deployment. Firstly, we collected and preprocessed medical image datasets that contain both normal and abnormal images. We ensured that the images were properly labeled to facilitate supervised and semi-supervised training.
 
-Then we implemented the architecture of the AE-FLOW model from scratch. The encoder component of the model consists of convolutional layers that extract features from input images. The normalizing flow bottleneck component transforms these features into a tractable probability distribution using normalizing flow methods. Finally, the decoder component reconstructs images from these transformed features.
+Then we implemented the architecture of the AE-FLOW model from scratch, i.e. without official repository. The encoder component of the model consists of convolutional layers that extract features from input images. The normalizing flow bottleneck component transforms these features into a tractable probability distribution using normalizing flow methods. Finally, the decoder component reconstructs images from these transformed features.
 
 While training, we honestly follow the author's footstep and training settings. However, due to the lack of official implementation, there still are gaps between our replicating results and original results. This is partly because of the vagueness of the paper. For example, AE-Flow uses ImageNet-pretrianed wide resnet model as encoder which requires 3 channels images as input. However, for the chest-X-ray dataset and OCT dataset, the input images are grayscale. The author does not explain the specific pre-processing methods are used. What we do here is to expand the grayscale image to RGB image which may break the balance between the hyperparameters used to calculate loss and anomaly score. 
 
@@ -104,7 +104,7 @@ We trained the AE-FLOW model using both self-supervised and semi-supervised appr
 
 Once we were satisfied with our trained AE-FLOW model's performance on our medical image dataset, we deployed it for anomaly detection tasks in real-world applications.
 
-We expend less than half hour to train our model on Colab with a single A100 
+We expend less than half hour to train our model on Colab with a single A100 and the demo of our implementation has been attached with this repository. Our figures for distribution of normal and abnormal images show that we have perfectly differentiate them.
 ### Training Results:
 
 To further confirm the efficacy, the distribution curves representing the computed anomaly scores for both categories, namely normal and anomaly, are depicted in the provided Figure, which is one of the figures we got during training. The color red represents anomaly data, while green signifies normal data; the x-axis illustrates the anomaly score, while the y-axis represents the probability density. Notably, the anomaly data consistently exhibits higher predicted anomaly scores compared to the normal data. Additionally, the overlapping area between the two curves is relatively small, constituting only a minor proportion of the total area. Each curve also possesses a distinct peak, affirming the validity and effectiveness of the proposed anomaly score function as a reliable measure for distinguishing normal and abnormal samples. 
