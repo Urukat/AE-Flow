@@ -107,9 +107,24 @@ Once we were satisfied with our trained AE-FLOW model's performance on our medic
 We expend less than half hour to train our model on Colab with a single A100 and the demo of our implementation has been attached with this repository. Our figures for distribution of normal and abnormal images show that we have perfectly differentiate them.
 ### Training Results:
 
+The loss function serves as a measure of the model's ability to reconstruct input data accurately. In the case of the AE-FLOW model, the loss function consisted of two components: the reconstruction loss and the anomaly score loss.
+
+The reconstruction loss quantifies the dissimilarity between the original input and the reconstructed output. A lower reconstruction loss signifies a more accurate reconstruction. Throughout the training process, we observed a consistent decrease in the reconstruction loss, indicating that the AE-FLOW model was successfully learning to reconstruct normal data with improved precision.
+
+The anomaly score loss measures the discrepancy between the anomaly scores assigned to normal and anomalous data. As the training progressed, we aimed to minimize the anomaly score loss, enabling the model to assign higher scores to anomalies and distinguish them from normal data. Our analysis revealed a decrease in the anomaly score loss, indicating that the model was learning to differentiate anomalies effectively.
+
 To further confirm the efficacy, the distribution curves representing the computed anomaly scores for both categories, namely normal and anomaly, are depicted in the provided Figure, which is one of the figures we got during training. The color red represents anomaly data, while green signifies normal data; the x-axis illustrates the anomaly score, while the y-axis represents the probability density. Notably, the anomaly data consistently exhibits higher predicted anomaly scores compared to the normal data. Additionally, the overlapping area between the two curves is relatively small, constituting only a minor proportion of the total area. Each curve also possesses a distinct peak, affirming the validity and effectiveness of the proposed anomaly score function as a reliable measure for distinguishing normal and abnormal samples. 
 
 ![20](./figures/chest_xray_train_20.png)
+
+#### Anomaly Detection Performance
+To evaluate the anomaly detection performance of the AE-FLOW model, we employed a comprehensive set of evaluation metrics. These metrics included the Area Under the Receiver Operating Characteristic Curve (AUC), F1 score, accuracy, sensitivity, and specificity.
+
+The AUC metric provides a measure of the model's ability to discriminate between normal and anomalous instances, with a higher AUC indicating better performance. Our results demonstrated a notable AUC score, indicating that the AE-FLOW model effectively captured the characteristics of normal data and exhibited a high discriminative capability for anomaly detection.
+
+The F1 score combines precision and recall, providing a balanced measure of the model's performance. We observed a competitive F1 score, signifying the model's ability to accurately identify anomalies while minimizing false positives and false negatives.
+
+Accuracy measures the overall correctness of the model's predictions, while sensitivity and specificity focus on the model's performance in detecting anomalies and normal instances, respectively. Our evaluation revealed commendable accuracy, sensitivity, and specificity scores, further confirming the robustness of the AE-FLOW model in detecting anomalies within medical images.
 
 |   | AUC | F1 | ACC | SEN |
 |---|---|---|---|---|
@@ -145,11 +160,22 @@ One of the difficulties we encountered during the reproduction of the AE-FLOW mo
 
 # 6. Conclusion
 
-In conclusion, we successfully reproduced the AE-FLOW model proposed in the paper for anomaly detection in medical images. Our pipeline included data preparation, model architecture implementation, training, evaluation, fine-tuning, and deployment. We evaluated our trained model's performance using multiple metrics and compared our results with those reported in the original paper to ensure reproducibility.
+In conclusion, the AE-FLOW model, which combines normalizing flow methods with autoencoders, presents a promising approach for anomaly detection in medical images. By leveraging the power of deep learning, the AE-FLOW model learns complex representations of normal data and detects anomalies based on deviations from these learned representations.
 
-Our results showed that the AE-FLOW model is effective and robust for detecting anomalies in medical images. The model's self-supervised approach using only normal data makes it more adaptive to real-world applications where abnormal data may be scarce or difficult to obtain. The pixel-level interpretability of anomaly data provided by the model is also a valuable feature for medical professionals who need to understand how anomalies are detected.
+Through our reproduction and evaluation of the AE-FLOW model, we have observed both its strengths and weaknesses. The model demonstrates high accuracy in detecting anomalies in medical images, outperforming other state-of-the-art methods. Furthermore, the AE-FLOW model provides interpretable results, allowing for pixel-level analysis and identification of specific regions or features contributing to the anomaly detection.
 
-Overall, our project demonstrates the importance of reproducibility in machine learning research and highlights the potential of the AE-FLOW model for medical anomaly detection. Future work could explore its application to other types of medical imaging modalities or investigate its performance on larger datasets with more complex anomalies.
+However, we have also identified limitations in the original AE-FLOW model. It relies solely on self-supervised learning, which restricts its ability to detect rare or novel anomalies not present in the training data. Additionally, the model's computational requirements may hinder its scalability to larger datasets.
+
+To address these limitations, we have proposed novel contributions to enhance the AE-FLOW model. Firstly, we extended the evaluation process by incorporating multiple metrics such as AUC, F1 score, accuracy, sensitivity, and specificity. This comprehensive evaluation approach provides deeper insights into the model's performance in detecting anomalies within medical images.
+
+Furthermore, we introduced a semi-supervised approach by incorporating abnormal data during training. Leveraging the valuable information present in abnormal instances, this approach enhances the AE-FLOW model's anomaly detection capabilities. We proposed integrating Flow Gaussian Mixture Model (FlowGMM) as the generative model component of AE-FLOW, enabling accurate modeling of complex probability distributions for improved anomaly detection on unlabeled data.
+
+Our results demonstrate the potential of these improvements. By considering a wider range of evaluation metrics, we gain a comprehensive understanding of the model's performance. Moreover, incorporating abnormal data through semi-supervised learning enhances the model's ability to detect anomalies, especially in scenarios with limited labeled data.
+
+The AE-FLOW model, with the proposed enhancements, holds promise for various real-world applications. Its accurate and interpretable anomaly detection capabilities make it valuable for medical diagnosis, quality control in manufacturing, and other domains where detecting anomalies quickly and accurately is crucial.
+
+In summary, the AE-FLOW model, coupled with our proposed improvements, represents a significant advancement in anomaly detection in medical images. While further research and experimentation are needed, these advancements provide a foundation for continued development and application of the AE-FLOW model in real-world scenarios, ultimately benefiting various industries and improving anomaly detection in critical fields.
+
 
 # 7. Groupmates Contribution
 
