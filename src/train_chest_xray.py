@@ -89,16 +89,16 @@ def train(args):
             # do not know if this works
             # torch.cuda.empty_cache()
         # find threshold from training data
-        optimal_threshold = find_threshold(model, test_loader_normal, test_loader_pneumonia)
-        print(f"Optimal threshold: {optimal_threshold}")
+        # optimal_threshold = find_threshold(model, test_loader_normal, test_loader_pneumonia)
+        # print(f"Optimal threshold: {optimal_threshold}")
         # get resutls of test set
         # train_results = ut.get_test_results(model, beta, optimal_threshold, train_loader_normal, train_loader_pneumonia)
         # print(f"Epoch {epoch}: train results: {train_results}")
-        test_results = ut.get_test_results(model, beta, optimal_threshold, test_loader_normal, test_loader_pneumonia)
-        print(f"Epoch {epoch}: test results: {test_results}")
+        # test_results = ut.get_test_results(model, beta, optimal_threshold, test_loader_normal, test_loader_pneumonia)
+        # print(f"Epoch {epoch}: test results: {test_results}")
         # this is for test set
-        # ut.plot_distribution(model, beta, test_loader_normal, test_loader_pneumonia, "chest_xray_test", epoch)
-        # ut.plot_distribution(model, beta, train_loader_normal, train_loader_pneumonia, "chest_xray_train", epoch)
+        ut.plot_distribution(model, beta, test_loader_normal, test_loader_pneumonia, "chest_xray_test", epoch)
+        ut.plot_distribution(model, beta, train_loader_normal, train_loader_pneumonia, "chest_xray_train", epoch)
 
     torch.save(model, "./src/checkpoint/{}_{}.pt".format(args.subnet, args.epochs))              
     print(f"Train: epoch {epoch}, anomaly_score : {torch.sum(torch.stack(anomaly_scores))} train loss = {epoch_loss}")
